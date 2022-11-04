@@ -1,34 +1,19 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Bookbrooch
 
-## Getting Started
+## User Stories
 
-First, run the development server:
+- [ ] As a user I want to be able to create a private profile so I can save my quotes privately.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- [ ] As a user, I want to be able to type a quote and add save to my page.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- [ ] As a user I want to be able to tag my quotes so I can organise them by theme.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- [ ] As a user I want to be able to sort quotes by category so I can keep them organised.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- [ ] As a user I want to have the option to play games related to quotes so I am more literate.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- [ ] As a user I will need some rewards and prompting to log new quotes regularly so I am more motivated to read.
 
-## Learn More
+- [ ] As a user who spends a lot of time in front of the screen, I want to view in dark mode so that I can protect my eyes.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [ ] As a forgetful user, I'd like the application to be descriptive enough so I can navigate easier around it. 
