@@ -2,6 +2,14 @@ import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
+// import { app } from "../firebase/initFireBase";
+// import {
+//   getFirestore,
+//   collection,
+//   getDocs,
+//   setDoc,
+//   doc,
+// } from "firebase/firestore";
 
 const LoginPage = () => {
   const { logIn } = useAuth();
@@ -16,8 +24,26 @@ const LoginPage = () => {
 
   const onSubmit = async (data) => {
     try {
-      await logIn(data.email, data.password);
-      router.push("/dashboard");
+      await logIn(data.email, data.password).then(async (userCredential) => {
+        // Signed in
+        // Test on if we can work with the db from Front end
+        const user = userCredential.user;
+        // const db = getFirestore(app);
+        // const quotesCol = collection(db, "quotes");
+        // const data = {
+        //   author: "wqd,dw",
+        //   quote: "fqwfw",
+        // };
+
+        // await setDoc(doc(db, "quotes", "5"), data);
+
+        // const snapShot1 = await getDocs(quotesCol);
+        // snapShot1.forEach((snap) => {
+        //   console.log(snap.data());
+        // });
+        router.push(`/users/${user.uid}`);
+        // ...
+      });
     } catch (error) {
       console.log(error.message);
     }
