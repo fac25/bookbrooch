@@ -25,6 +25,6 @@
 
 ### Afternoon
 
-- Dynamic Routes for users.
-- Creating reusable functions to interact with Firestore db.
+- On signup user is added to DB
+- Create db queries for adding a new user, adding quotes and displaying the quote collection by a given user
 
