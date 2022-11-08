@@ -27,7 +27,7 @@ const LoginPage = () => {
       await logIn(data.email, data.password).then(async (userCredential) => {
         // Signed in
         // Test on if we can work with the db from Front end
-        // const user = userCredential.user;
+        const user = userCredential.user;
         // const db = getFirestore(app);
         // const quotesCol = collection(db, "quotes");
         // const data = {
