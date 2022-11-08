@@ -1,4 +1,4 @@
-##07-11-2022
+## 07-11-2022
 
 ### Morning
 
@@ -9,3 +9,18 @@
 
 - Setup and testFirebase Auth
 - Deployed to Vercel
+
+## 08-11-2022
+
+### Morning
+
+- We fixed "type": "module" bug.
+- Stopped using environment variables (for now).
+- Dynamic Routes for users.
+- Creating reusable functions to interact with Firestore db.
+
+### Afternoon
+
+- Dynamic Routes for users.
+- Creating reusable functions to interact with Firestore db.
+
