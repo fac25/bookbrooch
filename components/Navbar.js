@@ -37,7 +37,7 @@ const Navbar = ({ children }) => {
       <header>
         <div>
           <Link href="/">
-            <span>Firebase Authentication with Next.js</span>
+            <span>Bookbrooch</span>
           </Link>
         </div>
 
@@ -53,7 +53,7 @@ const Navbar = ({ children }) => {
               ) : (
                 <>
                   <li>
-                    <Link href="/dashboard">Dashboard</Link>
+                    <Link href={`/users/${user.uid}`}>Dashboard</Link>
                   </li>
                   <li>
                     <a onClick={handleLogout}>Logout</a>

@@ -1,4 +1,5 @@
 import app from "../firebase/initFireBase.js";
+import app from "../firebase/initFireBase.js";
 
 import {
   getFirestore,
