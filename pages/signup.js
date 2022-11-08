@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import { use } from "react";
+import { addNewUserToDB } from "../firebase/firestore"
 
 const SignupPage = () => {
   const {
@@ -19,6 +20,7 @@ const SignupPage = () => {
         // Signed in
         const user = userCredential.user;
         // [TODO] add a new user (document) to the users collection, the id of this user (document) should be user.uid i.e. the same as the route in the line below
+        addNewUserToDB(user.uid)
         router.push(`/users/${user.uid}`);
       });
     } catch (error) {
