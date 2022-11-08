@@ -69,28 +69,32 @@ async function addQuote(uidFromAuth, newQuote) {
 // DISLPAY ALL QUOTES BY USER =======================
 async function displayUserQuotes(user) {
   // DISPLAY COLLECTION OF QUOTES 
-  const colRef = collection(db, "users", user, "quotes");
-  const userQuoteCol = await getDocs(colRef);
-  userQuoteCol.forEach((snap) => {
-    console.log(snap.data());
-  });
-  // TO DO ================
-  // DISPLAY COLLECTION OF QUOTES WITH UNIQUE IDs
-  // const docRef = doc(db, "users", user)
-  // const userDoc = await getDocs(doc(db, "users", user));
-  // userDoc.forEach((snap) => {
+  // const colRef = collection(db, "users", user, "quotes");
+  // const userQuoteCol = await getDocs(colRef);
+  // userQuoteCol.forEach((snap) => {
   //   console.log(snap.data());
   // });
+
+  // TO DO ================
+  // DISPLAY COLLECTION OF QUOTES WITH UNIQUE IDs
+  const colRef = collection(db, "users", user, "quotes");
+  const userQuoteCol = await getDocs(colRef);
+
+  // const a = colRef.snapshotChanges()
+  // console.log(colRef)
+
+  userQuoteCol.forEach((snap) => {
+    console.log(snap.id);
+  });
 
 }
 
 // TEST displayUserQuotes
-// displayUserQuotes("sumithra")
+displayUserQuotes("sumithra")
 
 
 // DELETE SPECIFIC QUOTE =======================
-
-
+// Delete by id
 
 // RESOURSES =======================
 
