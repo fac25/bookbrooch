@@ -36,19 +36,19 @@ const SignupPage = () => {
       <form action="" onSubmit={handleSubmit(onSubmit)}>
         <div>
           <div>
-            <label htmlFor="">Name</label>
+            <label htmlFor="name">Name</label>
           </div>
           <input type="text" id="name" {...register("name")} />
         </div>
         <div>
           <div>
-            <label htmlFor="">Email</label>
+            <label htmlFor="email">Email</label>
           </div>
           <input type="email" id="email" {...register("email")} />
         </div>
         <div>
           <div>
-            <label htmlFor="">Password</label>
+            <label htmlFor="password">Password</label>
           </div>
 
           <input type="password" id="password" {...register("password")} />
