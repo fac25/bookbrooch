@@ -19,8 +19,10 @@ const SignupPage = () => {
       await signUp(data.email, data.password).then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        // [TODO] add a new user (document) to the users collection, the id of this user (document) should be user.uid i.e. the same as the route in the line below
-        addNewUserToDB(user.uid)
+        // [X] add a new user (document) to the users collection, the id of this user (document) should be user.uid i.e. the same as the route in the line below
+        addNewUserToDB(user.uid, data.name)
+        // [X] data.name is the user's name
+        // [X] update query to take the data.name
         router.push(`/users/${user.uid}`);
       });
     } catch (error) {
@@ -32,6 +34,12 @@ const SignupPage = () => {
     <div>
       <h2>Sign Up</h2>
       <form action="" onSubmit={handleSubmit(onSubmit)}>
+        <div>
+          <div>
+            <label htmlFor="">Name</label>
+          </div>
+          <input type="text" id="name" {...register("name")} />
+        </div>
         <div>
           <div>
             <label htmlFor="">Email</label>

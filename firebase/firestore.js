@@ -37,11 +37,11 @@ const quotesCol = collection(db, "quotes");
 // - [ ] give user option to order their quotes
 // - [ ] up/downvote quotes
 
-async function addNewUserToDB(uidFromAuth) {
-  await setDoc(doc(db, "users", uidFromAuth), {});
+async function addNewUserToDB(uidFromAuth, dataName) {
+  await setDoc(doc(db, "users", uidFromAuth), { name: dataName });
 }
 // TEST addUSER =======================
-// addNewUserToDB("myemail@somewhere.com");
+addNewUserToDB("Eminem123", "Michael M");
 // async function test() {
 //   const usersCol = collection(db, "users")
 //   const snapShot2 = await getDocs(usersCol);
@@ -90,7 +90,7 @@ async function displayUserQuotes(user) {
 }
 
 // TEST displayUserQuotes
-displayUserQuotes("sumithra")
+// displayUserQuotes("sumithra")
 
 
 // DELETE SPECIFIC QUOTE =======================
