@@ -21,10 +21,11 @@ export async function getServerSideProps({ params }) {
   // - [X] query the DB for name
   const username = await getUsername(userId)
   // - [X] pass it as props
-  // - [ ] query for quotes 
-  const quoteCol = await displayUserQuotes("Eminem123")
-  // - [ ] map through quotes and display
-
+  // - [x] query for quotes 
+  const quoteCol = await displayUserQuotes(userId)
+  // const quoteCol = await displayUserQuotes("Eminem123")
+  // - [x] map through quotes and display
+  console.log(quoteCol);
   return {
     props: {
       userData: {
@@ -38,18 +39,26 @@ export async function getServerSideProps({ params }) {
 const DashboardPage = ({ userData }) => {
   return (
     <ProtectedRoute>
-      <div>
-        <h1>{userData.name}</h1>
-        <h2>
-          {userData.quotes.map(quote => {
-          <div key={quote.quoteId}>
-            <div>{quote.quoteId}</div>
-
+      <h1>{userData.name}</h1>
+      <section>
+        {userData.quotes.map((quote) => {
+          return <div key={quote.quoteId}>
+            <p>{quote.quote}</p>
+            <p>
+              <span>
+                {quote.author}
+              </span>
+              -
+              <span>
+                {quote.title}
+              </span>
+            </p>
+            <p>
+              {quote.tags.map(tag => <button key={tag}>{tag}</button>)}
+            </p>
           </div>
         })}
-
-        </h2>
-      </div>
+      </section>
     </ProtectedRoute>
   );
 };
