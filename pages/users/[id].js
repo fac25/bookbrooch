@@ -1,5 +1,8 @@
 import ProtectedRoute from "../../components/ProtectedRoute";
+
 import { displayUserQuotes, getUsername, deleteQuote } from "../../firebase/firestore";
+import SaveQuoteForm from "../../components/saveQuoteForm";
+
 //import getUser function from firebase/firestore.js
 export async function getServerSideProps({ params }) {
   //params.id is the user's id
@@ -41,6 +44,7 @@ const DashboardPage = ({ userData }) => {
   return (
     <ProtectedRoute>
       <h1>{userData.name}</h1>
+      <SaveQuoteForm></SaveQuoteForm>
       <section>
         {userData.quotes.map((quoteObj) => {
           const { author, title, quote, quoteId, tags } = quoteObj;
