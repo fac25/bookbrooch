@@ -127,6 +127,14 @@ async function getUsername(userId) {
 // TEST Get username by userId
 // getUsername("Eminem123")
 
+// Delete a quote by id
+
+async function deleteQuote(userId, quoteId) {
+  // console.log(quoteId)
+  await deleteDoc(doc(db, "users", userId, "quotes", quoteId));
+  console.log(quoteId + " deleted")
+}
+
 
 // RESOURSES =======================
 
@@ -155,11 +163,11 @@ await updateDoc(washingtonRef, {
 // await setDoc(doc(db, "quotes", "3"), data);
 // const snapShot1 = await getDocs(quotesCol);
 
-// // await deleteDoc(doc(db, "quotes", "1"));
+// // await deleteDoc(doc(db, "quotes", "1", quoteid));
 
 // snapShot1.forEach((snap) => {
 //   console.log(snap.data());
 // });
 
 
-export { addNewUserToDB, addQuote, displayUserQuotes, getUsername }
+export { addNewUserToDB, addQuote, displayUserQuotes, getUsername, deleteQuote }

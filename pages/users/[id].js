@@ -1,5 +1,5 @@
 import ProtectedRoute from "../../components/ProtectedRoute";
-import { displayUserQuotes, getUsername } from "../../firebase/firestore";
+import { displayUserQuotes, getUsername, deleteQuote } from "../../firebase/firestore";
 //import getUser function from firebase/firestore.js
 export async function getServerSideProps({ params }) {
   //params.id is the user's id
@@ -29,6 +29,7 @@ export async function getServerSideProps({ params }) {
   return {
     props: {
       userData: {
+        userId,
         name: username,
         quotes: quoteCol /* this is just dummy data for now */,
       },
@@ -41,21 +42,26 @@ const DashboardPage = ({ userData }) => {
     <ProtectedRoute>
       <h1>{userData.name}</h1>
       <section>
-        {userData.quotes.map((quote) => {
-          return <div key={quote.quoteId}>
-            <p>{quote.quote}</p>
+        {userData.quotes.map((quoteObj) => {
+          const { author, title, quote, quoteId, tags } = quoteObj;
+          return <div key={quoteId}>
+            <p>{quote}</p>
             <p>
               <span>
-                {quote.author}
+                {author}
               </span>
               -
               <span>
-                {quote.title}
+                {title}
               </span>
             </p>
             <p>
-              {quote.tags.map(tag => <button key={tag}>{tag}</button>)}
+              {tags.map(tag => <button key={tag}>{tag}</button>)}
             </p>
+            <button onClick={() => {
+              console.log(quoteId, userData.userId)
+              deleteQuote(userData.userId, quoteId)
+            }}>Delete</button>
           </div>
         })}
       </section>
