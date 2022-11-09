@@ -37,13 +37,13 @@ export default function SaveQuoteForm() {
           {errors.quote && <p>{errors.quote.message}</p>}
         </div>
         <div>
-          <label htmlFor="">Book</label>
+          <label htmlFor="">Source</label>
           <input
             type="text"
-            id="book"
-            {...register("book", { required: "Book is required" })}
+            id="source"
+            {...register("source", { required: "Source is required" })}
           />
-          {errors.book && <p>{errors.book.message}</p>}
+          {errors.source && <p>{errors.source.message}</p>}
         </div>
         <div>
           <label htmlFor="">Author</label>
