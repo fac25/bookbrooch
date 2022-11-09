@@ -1,4 +1,6 @@
 import ProtectedRoute from "../../components/ProtectedRoute";
+import SaveQuoteForm from "../../components/saveQuoteForm";
+
 //import getUser function from firebase/firestore.js
 export async function getServerSideProps({ params }) {
   //params.id is the user's id
@@ -30,6 +32,7 @@ const DashboardPage = ({ userData }) => {
       <div>
         <h1>{userData.name}</h1>
       </div>
+      <SaveQuoteForm></SaveQuoteForm>
     </ProtectedRoute>
   );
 };
