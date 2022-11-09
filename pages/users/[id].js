@@ -1,4 +1,5 @@
 import ProtectedRoute from "../../components/ProtectedRoute";
+import { displayUserQuotes, getUsername } from "../../firebase/firestore";
 //import getUser function from firebase/firestore.js
 export async function getServerSideProps({ params }) {
   //params.id is the user's id
@@ -14,11 +15,21 @@ export async function getServerSideProps({ params }) {
 
   //get current user's details (their name, quotes etc) from database
 
+  // - [X] query DB to get the user's name, search by params.id
+  const userId = params.id
+  // - [X] write a query for the user's name
+  // - [X] query the DB for name
+  const username = await getUsername(userId)
+  // - [X] pass it as props
+  // - [ ] query for quotes 
+  const quoteCol = await displayUserQuotes("Eminem123")
+  // - [ ] map through quotes and display
+
   return {
     props: {
       userData: {
-        name: "Amy",
-        quotes: [{}, {}] /* this is just dummy data for now */,
+        name: username,
+        quotes: quoteCol /* this is just dummy data for now */,
       },
     },
   };
@@ -29,6 +40,15 @@ const DashboardPage = ({ userData }) => {
     <ProtectedRoute>
       <div>
         <h1>{userData.name}</h1>
+        <h2>
+          {userData.quotes.map(quote => {
+          <div key={quote.quoteId}>
+            <div>{quote.quoteId}</div>
+
+          </div>
+        })}
+
+        </h2>
       </div>
     </ProtectedRoute>
   );

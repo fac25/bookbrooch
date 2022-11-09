@@ -41,7 +41,7 @@ async function addNewUserToDB(uidFromAuth, dataName) {
   await setDoc(doc(db, "users", uidFromAuth), { name: dataName });
 }
 // TEST addUSER =======================
-addNewUserToDB("Eminem123", "Michael M");
+// addNewUserToDB("Eminem123", "Michael M");
 // async function test() {
 //   const usersCol = collection(db, "users")
 //   const snapShot2 = await getDocs(usersCol);
@@ -59,9 +59,9 @@ async function addQuote(uidFromAuth, newQuote) {
   // [Todo] GET random ID?
 }
 // TEST addQUOTE =======================
-// addQuote("sumithra", {
-//   quote: "gogogo",
-//   title: "a book of immense wisdom",
+// addQuote("Eminem123", {
+//   quote: "i am so commentful",
+//   title: "glwmrkfgw",
 //   author: "life",
 //   tags: ["eternal", "amazement"]
 // })
@@ -75,26 +75,58 @@ async function displayUserQuotes(user) {
   //   console.log(snap.data());
   // });
 
-  // TO DO ================
   // DISPLAY COLLECTION OF QUOTES WITH UNIQUE IDs
   const colRef = collection(db, "users", user, "quotes");
   const userQuoteCol = await getDocs(colRef);
+  // getDocs to get snap.id
+  // create new onject that includes quoteId
 
   // const a = colRef.snapshotChanges()
   // console.log(colRef)
-
+  let arr = []
   userQuoteCol.forEach((snap) => {
-    console.log(snap.id);
-  });
+    // console.log(snap.id);
+    // console.log(snap.data());
 
+    arr.push({
+      ...snap.data(),
+      quoteId: snap.id
+    })
+
+  });
+  console.log(arr);
+  return arr;
+
+  // [Todo] 
+  // [ ] return an array of quote objects
 }
 
 // TEST displayUserQuotes
-// displayUserQuotes("sumithra")
+// displayUserQuotes("Eminem123")
 
 
 // DELETE SPECIFIC QUOTE =======================
 // Delete by id
+
+
+// const docRef = doc(db, "cities", "SF");
+// const docSnap = await getDoc(docRef);
+
+// if (docSnap.exists()) {
+//   console.log("Document data:", docSnap.data());
+// } else {
+//   // doc.data() will be undefined in this case
+//   console.log("No such document!");
+// }
+// Query to get a name from a specific user by their id
+async function getUsername(userId) {
+  const username = await getDoc(doc(db, "users", userId))
+
+  return username.data().name
+}
+// TEST Get username by userId
+// getUsername("Eminem123")
+
 
 // RESOURSES =======================
 
@@ -130,4 +162,4 @@ await updateDoc(washingtonRef, {
 // });
 
 
-export { addNewUserToDB, addQuote, displayUserQuotes }
+export { addNewUserToDB, addQuote, displayUserQuotes, getUsername }
