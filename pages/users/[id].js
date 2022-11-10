@@ -85,7 +85,12 @@ const DashboardPage = ({ userData }) => {
           {quotes.map((quoteObj) => {
             const { author, source, quote, quoteId, tags } = quoteObj;
             return (
-              <Quote key={quoteId} userData={userData} quoteObj={quoteObj} />
+              <Quote
+                key={quoteId}
+                userData={userData}
+                quoteObj={quoteObj}
+                tagIsButton={true}
+              />
               // <li>
               //   <p>{quote}</p>
               //   <p>
