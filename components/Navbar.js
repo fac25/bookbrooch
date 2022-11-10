@@ -21,6 +21,11 @@ const Navbar = ({ children }) => {
       name: "Sign Up",
       link: "/signup",
     },
+    {
+      id: 4,
+      name: "Game",
+      link: "/game",
+    },
   ];
 
   const handleLogout = async () => {
