@@ -8,6 +8,7 @@ import {
 } from "../../firebase/firestore";
 import SaveQuoteForm from "../../components/saveQuoteForm";
 import { onSnapshot, collection } from "firebase/firestore";
+import Quote from "../../components/Quote";
 
 //import getUser function from firebase/firestore.js
 export async function getServerSideProps({ params }) {
@@ -80,30 +81,33 @@ const DashboardPage = ({ userData }) => {
       <SaveQuoteForm></SaveQuoteForm>
       <section>
         {/* {console.log(quotes)} */}
-        {quotes.map((quoteObj) => {
-          const { author, source, quote, quoteId, tags } = quoteObj;
-          return (
-            <div key={quoteId}>
-              <p>{quote}</p>
-              <p>
-                <span>{author}</span>-<span>{source}</span>
-              </p>
-              <p>
-                {tags.map((tag) => (
-                  <button key={tag}>{tag}</button>
-                ))}
-              </p>
-              <button
-                onClick={() => {
-                  console.log(quoteId, userData.userId);
-                  deleteQuote(userData.userId, quoteId);
-                }}
-              >
-                Delete
-              </button>
-            </div>
-          );
-        })}
+        <ul>
+          {quotes.map((quoteObj) => {
+            const { author, source, quote, quoteId, tags } = quoteObj;
+            return (
+              <Quote key={quoteId} userData={userData} quoteObj={quoteObj} />
+              // <li>
+              //   <p>{quote}</p>
+              //   <p>
+              //     <span>{author}</span>-<span>{source}</span>
+              //   </p>
+              //   <p>
+              //     {tags.map((tag) => (
+              //       <button key={tag}>{tag}</button>
+              //     ))}
+              //   </p>
+              //   <button
+              //     onClick={() => {
+              //       console.log(quoteId, userData.userId);
+              //       deleteQuote(userData.userId, quoteId);
+              //     }}
+              //   >
+              //     Delete
+              //   </button>
+              // </li>
+            );
+          })}
+        </ul>
       </section>
     </ProtectedRoute>
   );
