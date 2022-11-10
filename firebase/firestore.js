@@ -54,6 +54,13 @@ async function addQuote(uidFromAuth, newQuote) {
   const userQuoteCol = collection(db, "users", uidFromAuth, "quotes");
   const res = await setDoc(doc(userQuoteCol), newQuote);
 }
+
+// async function addQuote(uidFromAuth, newQuote) {
+//   // const d = await setDoc(doc(db, `users/${user}/quotes`, "a"), newQuote); // Adds doc named "a" with given quote
+//   const userQuoteCol = collection(db, `users/${uidFromAuth}/quotes`);
+//   const ref = await addDoc(userQuoteCol, newQuote); // [Todo] GET random ID?
+//   return ref.id;
+// }
 // TEST addQUOTE =======================
 // addQuote("Eminem123", {
 //   quote: "i am so commentful",
@@ -63,12 +70,11 @@ async function addQuote(uidFromAuth, newQuote) {
 // })
 
 // DISLPAY ALL QUOTES BY USER =======================
-async function displayUserQuotes(user) {
-  // get all QUOTES by user ID
+async function getUserQuotes(user) {
+// get all QUOTES by user ID
   const colRef = collection(db, "users", user, "quotes");
   //get all docs inside the quotes collection of this user
   const userQuoteCol = await getDocs(colRef);
-
   let usersQuotesWithQuoteIDsAdded = [];
   userQuoteCol.forEach((snap) => {
     usersQuotesWithQuoteIDsAdded.push({
@@ -76,12 +82,12 @@ async function displayUserQuotes(user) {
       quoteId: snap.id,
     });
   });
-  console.log(usersQuotesWithQuoteIDsAdded);
   return usersQuotesWithQuoteIDsAdded;
 }
 
 // TEST displayUserQuotes
-// displayUserQuotes("Eminem123")
+// getUserQuotes("Eminem123")
+
 
 // Find user's name
 // Query to get a name from a specific user by their id
@@ -136,7 +142,8 @@ await updateDoc(washingtonRef, {
 export {
   addNewUserToDB,
   addQuote,
-  displayUserQuotes,
+  getUserQuotes,
   getUsername,
   deleteQuote,
+  db,
 };

@@ -1,7 +1,14 @@
 import ProtectedRoute from "../../components/ProtectedRoute";
-
-import { displayUserQuotes, getUsername, deleteQuote } from "../../firebase/firestore";
+import { useAuth } from "../../context/AuthContext";
+import { useState, useEffect } from "react";
+import {
+  getUserQuotes,
+  getUsername,
+  deleteQuote,
+  db,
+} from "../../firebase/firestore";
 import SaveQuoteForm from "../../components/saveQuoteForm";
+import { onSnapshot, collection } from "firebase/firestore";
 
 //import getUser function from firebase/firestore.js
 export async function getServerSideProps({ params }) {
@@ -19,20 +26,19 @@ export async function getServerSideProps({ params }) {
   //get current user's details (their name, quotes etc) from database
 
   // - [X] query DB to get the user's name, search by params.id
-  const userId = params.id
+  const userId = params.id;
   // - [X] write a query for the user's name
   // - [X] query the DB for name
-  const username = await getUsername(userId)
+  const username = await getUsername(userId);
   // - [X] pass it as props
-  // - [x] query for quotes 
-  const quoteCol = await displayUserQuotes(userId)
-  // const quoteCol = await displayUserQuotes("Eminem123")
+  // - [x] query for quotes
+  const quoteCol = await getUserQuotes(userId);
+  // const quoteCol = await getUserQuotes("Eminem123")
   // - [x] map through quotes and display
-  console.log(quoteCol);
   return {
     props: {
       userData: {
-        userId,
+        // userId,
         name: username,
         quotes: quoteCol /* this is just dummy data for now */,
       },
@@ -41,32 +47,64 @@ export async function getServerSideProps({ params }) {
 }
 
 const DashboardPage = ({ userData }) => {
+  const { user } = useAuth();
+  // const [quotes, setQuotes] = useState(userData.quotes);
+
+  // const onDelete = (quoteId) => {
+  //   deleteQuote(user.uid, quoteId).then(() => {
+  //     let quotesCopy = quotes.filter((obj) => obj.quoteId !== quoteId);
+  //     setQuotes(quotesCopy);
+  //   });
+  // };
+
+  const [quotes, setQuotes] = useState([]);
+
+  // console.log("=============================================");
+  // console.log(quoteData);
+  useEffect(() => {
+    const colRef = collection(db, "users", user.uid, "quotes");
+    //real time update
+    onSnapshot(colRef, (snapshot) => {
+      const items = [];
+      snapshot.docs.forEach((snap) => {
+        items.push({
+          ...snap.data(),
+          quoteId: snap.id,
+        });
+      });
+      setQuotes(items);
+    });
+  }, []);
+
   return (
     <ProtectedRoute>
       <h1>{userData.name}</h1>
       <SaveQuoteForm></SaveQuoteForm>
       <section>
-        {userData.quotes.map((quoteObj) => {
-          const { author, title, quote, quoteId, tags } = quoteObj;
-          return <div key={quoteId}>
-            <p>{quote}</p>
-            <p>
-              <span>
-                {author}
-              </span>
-              -
-              <span>
-                {title}
-              </span>
-            </p>
-            <p>
-              {tags.map(tag => <button key={tag}>{tag}</button>)}
-            </p>
-            <button onClick={() => {
-              console.log(quoteId, userData.userId)
-              deleteQuote(userData.userId, quoteId)
-            }}>Delete</button>
-          </div>
+        {/* {console.log(quotes)} */}
+        {quotes.map((quoteObj) => {
+          const { author, source, quote, quoteId, tags } = quoteObj;
+          return (
+            <div key={quoteId}>
+              <p>{quote}</p>
+              <p>
+                <span>{author}</span>-<span>{source}</span>
+              </p>
+              <p>
+                {tags.map((tag) => (
+                  <button key={tag}>{tag}</button>
+                ))}
+              </p>
+              <button
+                onClick={() => {
+                  console.log(quoteId, user.uid);
+                  deleteQuote(user.uid, quoteId);
+                }}
+              >
+                Delete
+              </button>
+            </div>
+          );
         })}
       </section>
     </ProtectedRoute>
