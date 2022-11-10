@@ -9,6 +9,7 @@ import {
 import SaveQuoteForm from "../../components/saveQuoteForm";
 import { onSnapshot, collection } from "firebase/firestore";
 import Quote from "../../components/Quote";
+import FilterQuotesForm from "../../components/FilterQuotesForm";
 
 //import getUser function from firebase/firestore.js
 export async function getServerSideProps({ params }) {
@@ -55,8 +56,22 @@ const DashboardPage = ({ userData }) => {
   //     setQuotes(quotesCopy);
   //   });
   // };
+  /*
+  let filtered;
+    category === "all"
+      ? (filtered = products)
+      : (filtered = products.filter((product) => {
+          return product.category === category;
+        })); 
+        
+        
+        
+        
+        <nav onClick={(e) => setCategory(e.target.id)}>
+        */
 
   const [quotes, setQuotes] = useState([]);
+  const [category, setCategory] = useState("all");
 
   // console.log("=============================================");
   // console.log(quoteData);
@@ -75,14 +90,22 @@ const DashboardPage = ({ userData }) => {
     });
   }, []);
 
+  let filteredQuotes;
+  category === "all"
+    ? (filteredQuotes = quotes)
+    : (filteredQuotes = quotes.filter((q) => {
+        return q.tags.includes(category);
+      }));
+
   return (
     <ProtectedRoute>
       <h1>{userData.name}</h1>
       <SaveQuoteForm></SaveQuoteForm>
       <section>
         {/* {console.log(quotes)} */}
+        <FilterQuotesForm setCategory={setCategory}></FilterQuotesForm>
         <ul>
-          {quotes.map((quoteObj) => {
+          {filteredQuotes.map((quoteObj) => {
             const { author, source, quote, quoteId, tags } = quoteObj;
             return (
               <Quote
@@ -90,6 +113,7 @@ const DashboardPage = ({ userData }) => {
                 userData={userData}
                 quoteObj={quoteObj}
                 tagIsButton={true}
+                setCategory={setCategory}
               />
               // <li>
               //   <p>{quote}</p>
