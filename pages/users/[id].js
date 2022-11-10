@@ -1,5 +1,4 @@
 import ProtectedRoute from "../../components/ProtectedRoute";
-import { useAuth } from "../../context/AuthContext";
 import { useState, useEffect } from "react";
 import {
   getUserQuotes,
@@ -38,7 +37,7 @@ export async function getServerSideProps({ params }) {
   return {
     props: {
       userData: {
-        // userId,
+        userId,
         name: username,
         quotes: quoteCol /* this is just dummy data for now */,
       },
@@ -47,7 +46,6 @@ export async function getServerSideProps({ params }) {
 }
 
 const DashboardPage = ({ userData }) => {
-  const { user } = useAuth();
   // const [quotes, setQuotes] = useState(userData.quotes);
 
   // const onDelete = (quoteId) => {
@@ -62,7 +60,7 @@ const DashboardPage = ({ userData }) => {
   // console.log("=============================================");
   // console.log(quoteData);
   useEffect(() => {
-    const colRef = collection(db, "users", user.uid, "quotes");
+    const colRef = collection(db, "users", userData.userId, "quotes");
     //real time update
     onSnapshot(colRef, (snapshot) => {
       const items = [];
@@ -97,8 +95,8 @@ const DashboardPage = ({ userData }) => {
               </p>
               <button
                 onClick={() => {
-                  console.log(quoteId, user.uid);
-                  deleteQuote(user.uid, quoteId);
+                  console.log(quoteId, userData.userId);
+                  deleteQuote(userData.userId, quoteId);
                 }}
               >
                 Delete
