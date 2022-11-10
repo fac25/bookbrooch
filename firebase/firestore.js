@@ -58,6 +58,13 @@ async function addQuote(uidFromAuth, newQuote) {
   const res = await setDoc(doc(userQuoteCol), newQuote);
   // [Todo] GET random ID?
 }
+
+// async function addQuote(uidFromAuth, newQuote) {
+//   // const d = await setDoc(doc(db, `users/${user}/quotes`, "a"), newQuote); // Adds doc named "a" with given quote
+//   const userQuoteCol = collection(db, `users/${uidFromAuth}/quotes`);
+//   const ref = await addDoc(userQuoteCol, newQuote); // [Todo] GET random ID?
+//   return ref.id;
+// }
 // TEST addQUOTE =======================
 // addQuote("Eminem123", {
 //   quote: "i am so commentful",
@@ -67,8 +74,8 @@ async function addQuote(uidFromAuth, newQuote) {
 // })
 
 // DISLPAY ALL QUOTES BY USER =======================
-async function displayUserQuotes(user) {
-  // DISPLAY COLLECTION OF QUOTES 
+async function getUserQuotes(user) {
+  // DISPLAY COLLECTION OF QUOTES
   // const colRef = collection(db, "users", user, "quotes");
   // const userQuoteCol = await getDocs(colRef);
   // userQuoteCol.forEach((snap) => {
@@ -83,31 +90,28 @@ async function displayUserQuotes(user) {
 
   // const a = colRef.snapshotChanges()
   // console.log(colRef)
-  let arr = []
+  let arr = [];
   userQuoteCol.forEach((snap) => {
     // console.log(snap.id);
     // console.log(snap.data());
 
     arr.push({
       ...snap.data(),
-      quoteId: snap.id
-    })
-
+      quoteId: snap.id,
+    });
   });
-  console.log(arr);
+  // console.log(arr);
   return arr;
 
-  // [Todo] 
+  // [Todo]
   // [ ] return an array of quote objects
 }
 
 // TEST displayUserQuotes
 // displayUserQuotes("Eminem123")
 
-
 // DELETE SPECIFIC QUOTE =======================
 // Delete by id
-
 
 // const docRef = doc(db, "cities", "SF");
 // const docSnap = await getDoc(docRef);
@@ -120,9 +124,9 @@ async function displayUserQuotes(user) {
 // }
 // Query to get a name from a specific user by their id
 async function getUsername(userId) {
-  const username = await getDoc(doc(db, "users", userId))
+  const username = await getDoc(doc(db, "users", userId));
 
-  return username.data().name
+  return username.data().name;
 }
 // TEST Get username by userId
 // getUsername("Eminem123")
@@ -132,9 +136,8 @@ async function getUsername(userId) {
 async function deleteQuote(userId, quoteId) {
   // console.log(quoteId)
   await deleteDoc(doc(db, "users", userId, "quotes", quoteId));
-  console.log(quoteId + " deleted")
+  console.log(quoteId + " deleted");
 }
-
 
 // RESOURSES =======================
 
@@ -169,5 +172,11 @@ await updateDoc(washingtonRef, {
 //   console.log(snap.data());
 // });
 
-
-export { addNewUserToDB, addQuote, displayUserQuotes, getUsername, deleteQuote }
+export {
+  addNewUserToDB,
+  addQuote,
+  getUserQuotes,
+  getUsername,
+  deleteQuote,
+  db,
+};
