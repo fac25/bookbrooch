@@ -1,5 +1,6 @@
 import { deleteQuote } from "../firebase/firestore";
-export default function Quote({ quoteObj, userData }) {
+import { useState } from "react";
+export default function Quote({ quoteObj, userData = null, tagIsButton }) {
   const { quoteId, quote, author, source, tags } = quoteObj;
   return (
     <li>
@@ -8,18 +9,24 @@ export default function Quote({ quoteObj, userData }) {
         <span>{author}</span>-<span>{source}</span>
       </p>
       <p>
-        {tags.map((tag) => (
-          <button key={tag}>{tag}</button>
-        ))}
+        {tags.map((tag) =>
+          tagIsButton ? (
+            <button key={tag}>{tag}</button>
+          ) : (
+            <p key={tag}>{tag}</p>
+          )
+        )}
       </p>
-      <button
-        onClick={() => {
-          console.log(quoteId, userData.userId);
-          deleteQuote(userData.userId, quoteId);
-        }}
-      >
-        Delete
-      </button>
+      {userData && (
+        <button
+          onClick={() => {
+            console.log(quoteId, userData.userId);
+            deleteQuote(userData.userId, quoteId);
+          }}
+        >
+          Delete
+        </button>
+      )}
     </li>
   );
 }
