@@ -2,7 +2,7 @@
 // - [ ] every even nr quote will be turned into a fake one
 // - [ ] include a key realquote: "real quote"
 
-const quoteData = [
+export default quoteData = [
   { quote: "Do one thing every day that scares you.", real: true },
   {
     quote:
