@@ -7,6 +7,7 @@ export default function SaveQuoteForm() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const { user } = useAuth();
@@ -16,7 +17,14 @@ export default function SaveQuoteForm() {
     // console.log(data);
 
     try {
-      addQuote(user.uid, data);
+      addQuote(user.uid, data).then(() => {
+        reset(() => ({
+          quote: "",
+          source: "",
+          author: "",
+          tags: "",
+        }));
+      });
     } catch (error) {
       console.log(error.message);
       alert(error.message);
@@ -28,7 +36,7 @@ export default function SaveQuoteForm() {
       <h2>Save a quote</h2>
       <form action="" onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <label htmlFor="">Quote</label>
+          <label htmlFor="quote">Quote</label>
           <input
             type="text"
             id="quote"
@@ -37,7 +45,7 @@ export default function SaveQuoteForm() {
           {errors.quote && <p>{errors.quote.message}</p>}
         </div>
         <div>
-          <label htmlFor="">Source</label>
+          <label htmlFor="source">Source</label>
           <input
             type="text"
             id="source"
@@ -46,7 +54,7 @@ export default function SaveQuoteForm() {
           {errors.source && <p>{errors.source.message}</p>}
         </div>
         <div>
-          <label htmlFor="">Author</label>
+          <label htmlFor="author">Author</label>
           <input
             type="text"
             id="author"
@@ -55,7 +63,7 @@ export default function SaveQuoteForm() {
           {errors.author && <p>{errors.author.message}</p>}
         </div>
         <div>
-          <label htmlFor="">Tags</label>
+          <label htmlFor="tags">Tags</label>
           <select
             id="tags"
             name="tags"
