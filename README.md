@@ -16,6 +16,9 @@ Make sure you have Git and Node (v18) installed.
 2. Run `npm install` to install all the dependencies
 3. Run `npm run dev` to start the local dev server
 
+Notes:
+// Currently you can play the game only if you are logged out.
+// Vercel is not updated
 
 ## User Stories
 
