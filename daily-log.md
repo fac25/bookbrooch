@@ -54,3 +54,16 @@ Loading problem
 My favourite!
 ![image](https://user-images.githubusercontent.com/99407460/201336886-dd89ecea-8d15-43f5-bf5d-cc00d31c4005.png)
 
+
+---
+
+Firebase (return the id of a newly added document)
+
+``` javascript
+  async function addQuote(uidFromAuth, newQuote) {
+ //const d = await setDoc(doc(db, `users/${user}/quotes`, "a"), newQuote); // Adds doc named "a" with given quote
+     const userQuoteCol = collection(db, `users/${uidFromAuth}/quotes`);
+     const ref = await addDoc(userQuoteCol, newQuote); // [Todo] GET random ID?
+   return ref.id;
+  }
+```
