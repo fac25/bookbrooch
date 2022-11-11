@@ -44,3 +44,8 @@
 - [ ] Add some content to homepage
 - [ ] Sort/filter functionality for quotes on users/[id.js] page
 - [ ] Create at least one game
+
+
+## Presentation slides
+Loading problem
+![image](https://user-images.githubusercontent.com/99407460/201329217-cfc1df40-78be-468a-96a5-e55304724db8.png)
