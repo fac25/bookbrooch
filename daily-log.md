@@ -36,13 +36,13 @@
 - [x] Complete functionality for delete/add quote on users/[id.js] i.e. page should be re-rendered when new quotes are added or when an exisring quote is deleted
 - [x] Merge form-clear branch
 - [ ] Update daily log md for 9th Nov
-- [ ] Investigate dot.env()/environment variables for initFirebase.js
-- [ ] Look for a way to solve refresh bug on users/[id.js] page (and any page that uses ProtectedRoute component)
+- [x] Investigate dot.env()/environment variables for initFirebase.js
+- [x] Look for a way to solve refresh bug on users/[id.js] page (and any page that uses ProtectedRoute component)
 - [x] Message mentors about code review
-- Update the main readme.md before code review at 4pm
-- [ ] Create a reusable component for quotes
-- [ ] Add some content to homepage
-- [ ] Sort/filter functionality for quotes on users/[id.js] page
+- [x] Update the main readme.md before code review at 4pm
+- [x] Create a reusable component for quotes
+- [x] Add some content to homepage
+- [x] filter functionality for quotes on users/[id.js] page
 - [ ] Create at least one game
 
 
