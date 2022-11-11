@@ -49,3 +49,8 @@
 ## Presentation slides
 Loading problem
 ![image](https://user-images.githubusercontent.com/99407460/201329217-cfc1df40-78be-468a-96a5-e55304724db8.png)
+
+---
+My favourite!
+![image](https://user-images.githubusercontent.com/99407460/201336886-dd89ecea-8d15-43f5-bf5d-cc00d31c4005.png)
+
