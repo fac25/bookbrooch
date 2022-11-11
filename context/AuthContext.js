@@ -6,14 +6,17 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import { useRouter } from "next/router.js";
 
 const AuthContext = createContext({});
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthContextProvider = ({ children }) => {
-  const [user, setUser] = useState({ email: null, uid: null });
+  //const router = useRouter();
+  const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
+  // const [userFetched, setUserFetched] = useState(false)
 
   useEffect(() => {
     const checkUserState = onAuthStateChanged(auth, (user) => {
@@ -22,11 +25,14 @@ export const AuthContextProvider = ({ children }) => {
           email: user.email,
           uid: user.uid,
         });
-      } else {
-        setUser({ email: null, uid: null });
+        // setUserFetched(true);
       }
+      setLoading(false)
+      // else {
+      //   setUser({ email: null, uid: null });
+      // }
     });
-    setLoading(false);
+
 
     return () => checkUserState();
   }, []);
@@ -45,8 +51,8 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, signUp, logIn, logOut }}>
-      {loading ? null : children}
+    <AuthContext.Provider value={{ user, signUp, logIn, logOut, /*userFetched*/ }}>
+      {loading ? (<>Loading</>) : children}
     </AuthContext.Provider>
   );
 };

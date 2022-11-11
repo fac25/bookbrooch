@@ -49,7 +49,7 @@ const Navbar = ({ children }) => {
         <nav>
           <ul>
             <>
-              {!user.uid ? (
+              {!user?.uid ? (
                 menuItems.map((item) => (
                   <li key={item.id}>
                     <Link href={item?.link}>{item?.name}</Link>
