@@ -42,13 +42,7 @@ export default function Home() {
     <div>
       <ul>
         {randomQuotes.map((quote, index) => {
-          return (
-            <Quote
-              key={quote.author + index}
-              quoteObj={quote}
-              tagIsButton={false}
-            />
-          );
+          return <Quote key={quote.author + index} quoteObj={quote} />;
         })}
       </ul>
     </div>

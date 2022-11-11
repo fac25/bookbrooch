@@ -1,6 +1,11 @@
 import { deleteQuote } from "../firebase/firestore";
 import { useState } from "react";
-export default function Quote({ quoteObj, userData = null, tagIsButton, setCategory }) {
+export default function Quote({
+  quoteObj,
+  userData = null,
+  tagIsButton = false,
+  setCategory,
+}) {
   const { quoteId, quote, author, source, tags } = quoteObj;
   return (
     <li>
@@ -11,7 +16,9 @@ export default function Quote({ quoteObj, userData = null, tagIsButton, setCateg
       <p>
         {tags.map((tag) =>
           tagIsButton ? (
-            <button onClick={ (e) => setCategory(e.target.innerText) } key={tag}>{tag}</button>
+            <button onClick={(e) => setCategory(e.target.innerText)} key={tag}>
+              {tag}
+            </button>
           ) : (
             <p key={tag}>{tag}</p>
           )
