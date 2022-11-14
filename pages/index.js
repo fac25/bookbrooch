@@ -3,6 +3,7 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { useEffect, useState } from "react";
 import Quote from "../components/Quote";
+import Search from "../components/Search";
 
 export default function Home() {
   let dayTagPairs = {
@@ -40,6 +41,7 @@ export default function Home() {
   }, []);
   return (
     <div>
+      <Search />
       <ul>
         {randomQuotes.map((quote, index) => {
           return <Quote key={quote.author + index} quoteObj={quote} />;
