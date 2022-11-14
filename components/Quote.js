@@ -6,7 +6,7 @@ export default function Quote({
   tagIsButton = false,
   setCategory,
 }) {
-  const { quoteId, quote, author, source, tags } = quoteObj;
+  const { quoteId, quote, author, source, tags = [] } = quoteObj;
   return (
     <li>
       <p>{quote}</p>
