@@ -81,6 +81,15 @@ Firebase (return the id of a newly added document)
 - [ ] Start styling the app
 - [ ] Add dark mode functionality
 
+### Morning
+
+- Continued Building the RealOrFake game.
+- Building the search feature on the home page.
+
+### Afternoon 
+- Continued Building the RealOrFake game.
+- Added basic styles to the app.
+- Added Theme feature with Chakra ui.
 
 
 
