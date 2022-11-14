@@ -67,3 +67,20 @@ Firebase (return the id of a newly added document)
    return ref.id;
   }
 ```
+
+
+
+
+
+## 14-11-2022
+
+### Things to do today
+
+- [ ] Finish the real/fake game
+- [ ] Implement search feature
+- [ ] Start styling the app
+- [ ] Add dark mode functionality
+
+
+
+
