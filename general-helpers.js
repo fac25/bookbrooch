@@ -6,7 +6,7 @@ function getRndInteger(min, max) {
 
 function removePunctuationFromString(str) {
   let replaced = str.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?><@]/g, "");
-  console.log(replaced);
+  // console.log(replaced);
   return replaced;
 }
 
