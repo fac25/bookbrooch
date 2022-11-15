@@ -19,6 +19,8 @@ import {
   getAdjectivesAdverbs,
 } from "../general-helpers";
 import { useState } from "react";
+import { Container, Heading, Text, Button } from "@chakra-ui/react";
+import Head from "next/head";
 // display first quote and hide form
 // useState for current quote
 // onclick listener for btn clicked = user response
@@ -57,12 +59,12 @@ export default function RealOrFake() {
   };
 
   return (
-    <main>
-      <h1>Real or fake</h1>
+    <Container  maxW="container.lg">
+      <Heading>Real or Fake</Heading>
       <section id="start-game">
-        <h2>Is this real?</h2>
-        <p>Test your knowledge with Spotting if a quote is real or not</p>
-        <button type="button" onClick={startGame} >Play</button>
+        <Text fontSize={['1.5em','0.8em']} textAlign={[ 'left', 'center' ]}>Is the display quote real?</Text>
+        <Text fontSize={['1.5em','.8em']} textAlign={[ 'left', 'center' ]}>Test your knowledge with spotting if a quote is real or not</Text>
+        <Button type="button" onClick={startGame} >Play</Button>
       </section>
       <section id="gameQuote">
         <>
@@ -70,25 +72,25 @@ export default function RealOrFake() {
             <p id="quote">{gameQuote.quote}</p>
             <p>- {gameQuote.author}</p>
             <section>
-              <button
+              <Button
                 onClick={(e) =>
                   checkAnswer(e, gameQuote.answer, setGameQuote, gameQuote)
                 }
               >
                 Real
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={(e) =>
                   checkAnswer(e, gameQuote.answer, setGameQuote, gameQuote)
                 }
               >
                 Fake
-              </button>
+              </Button>
             </section>
           </div>
         </>
       </section>
-    </main>
+    </Container>
   );
 }
 
