@@ -22,13 +22,17 @@ import Head from "next/head";
 // useState for current quote
 // onclick listener for btn clicked = user response
 import { useState, useEffect } from "react";
+import Loader from "../components/Loader";
 
 
 export default function RealOrFake() {
   const [gameQuote, setGameQuote] = useState({});
+  const [loaderVisibile, setLoaderVisibile] = useState(true);
 
   useEffect(() => {
-    startGame(setGameQuote);
+    startGame(setGameQuote).then(() => {
+      setLoaderVisibile(false);
+    });
   }, []);
 
   return (
@@ -38,6 +42,7 @@ export default function RealOrFake() {
         <Text fontSize={['1em','1.5em']} textAlign={[ 'left', 'center' ]}>Is the displayed quote real?</Text>
         <Text fontSize={['1em','1.5em']} textAlign={[ 'left', 'center' ]} mb={9}>Test your knowledge with spotting if a quote is real or not</Text>
       </section>
+      {loaderVisibile ? <Loader></Loader> : ""}
       <section id="gameQuote">
           <Flex m={[0,'auto']} p={5} maxW={['container.sm', 'container.md']}flexDirection={"column"} justifyContent={'center'} alignItems={'center'} borderWidth={'1px'} shadow={"md"}>
             <p id="quote">{gameQuote.quote}</p>
