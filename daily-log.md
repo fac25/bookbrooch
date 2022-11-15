@@ -91,5 +91,18 @@ Firebase (return the id of a newly added document)
 - Added basic styles to the app.
 - Added Theme feature with Chakra ui.
 
+## 15-11-2022
+
+### Morning
+
+- Continued Building the RealOrFake game.
+- Styling the app.
+
+### Afternoon 
+- Continued Building the RealOrFake game.
+- Continued Styling the app.
+- Added some tests.
+- Add a loader to some of the pages.
+
 
 
