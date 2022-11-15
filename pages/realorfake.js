@@ -1,5 +1,3 @@
-// - [ ] input for users to choose where the quote is coming from i.e. specific author, or book or just random
-// - [ ] fetch quotes using that input value
 // - [x] find an api to check the quote and break each word down into noun, adjective etc
 // - [x] pull out one word from the real quote
 // - [x] use an api to get a synonym for that word
@@ -11,67 +9,40 @@
 // - [x] message + real quote if wrong
 // - [x] alert("You are now playing!");
 
-import { set, useForm } from "react-hook-form";
 import { searchBy2, getSynonym } from "../api-helpers";
 import {
   getRndInteger,
   removePunctuationFromString,
   getAdjectivesAdverbs,
 } from "../general-helpers";
-import { useState } from "react";
-import { Container, Heading, Text, Button } from "@chakra-ui/react";
+
+import { Container, Heading, Text, Button, Flex } from "@chakra-ui/react";
 import Head from "next/head";
 // display first quote and hide form
 // useState for current quote
 // onclick listener for btn clicked = user response
+import { useState, useEffect } from "react";
+
 
 export default function RealOrFake() {
   const [gameQuote, setGameQuote] = useState({});
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const startGame = async (data) => {
-    try {
-      const schrodingerQuoteInfo = await getSchrodingerQuote(); // Schrodinger quote
-      // console.log(schrodingerQuoteInfo);
-      // [1] UPDATE QUOTE STATE WITH INITIAL QUOTE
-      getRndInteger(0, 2) === 0
-        ? setGameQuote({
-          quote: schrodingerQuoteInfo.realQuote,
-          answer: true,
-          author: schrodingerQuoteInfo.author,
-          realQuote: schrodingerQuoteInfo.realQuote,
-        })
-        : setGameQuote({
-          quote: schrodingerQuoteInfo.fakeQuote,
-          answer: false,
-          author: schrodingerQuoteInfo.author,
-          realQuote: schrodingerQuoteInfo.realQuote,
-        });
-    } catch (error) {
-      console.log(error.message);
-      alert(error.message);
-    }
-  };
+  useEffect(() => {
+    startGame(setGameQuote);
+  }, []);
 
   return (
     <Container  maxW="container.lg">
       <Heading>Real or Fake</Heading>
       <section id="start-game">
-        <Text fontSize={['1.5em','0.8em']} textAlign={[ 'left', 'center' ]}>Is the display quote real?</Text>
-        <Text fontSize={['1.5em','.8em']} textAlign={[ 'left', 'center' ]}>Test your knowledge with spotting if a quote is real or not</Text>
-        <Button type="button" onClick={startGame} >Play</Button>
+        <Text fontSize={['1em','1.5em']} textAlign={[ 'left', 'center' ]}>Is the displayed quote real?</Text>
+        <Text fontSize={['1em','1.5em']} textAlign={[ 'left', 'center' ]} mb={9}>Test your knowledge with spotting if a quote is real or not</Text>
       </section>
       <section id="gameQuote">
-        <>
-          <div>
+          <Flex m={[0,'auto']} p={5} maxW={['container.sm', 'container.md']}flexDirection={"column"} justifyContent={'center'} alignItems={'center'} borderWidth={'1px'} shadow={"md"}>
             <p id="quote">{gameQuote.quote}</p>
             <p>- {gameQuote.author}</p>
-            <section>
+            <Flex m={5} gap={4} alignItems='center' justifyContent={'center'}>
               <Button
                 onClick={(e) =>
                   checkAnswer(e, gameQuote.answer, setGameQuote, gameQuote)
@@ -86,18 +57,51 @@ export default function RealOrFake() {
               >
                 Fake
               </Button>
-            </section>
-          </div>
-        </>
+            </Flex>
+          </Flex>
       </section>
     </Container>
   );
 }
 
+async function startGame(setGameQuote) {
+  try {
+    const schrodingerQuoteInfo = await getSchrodingerQuote(); // Schrodinger quote
+    // console.log(schrodingerQuoteInfo);
+    // [1] UPDATE QUOTE STATE WITH INITIAL QUOTE
+    getRndInteger(0, 2) === 0
+      ? setGameQuote({
+          quote: schrodingerQuoteInfo.realQuote,
+          answer: true,
+          author: schrodingerQuoteInfo.author,
+          realQuote: schrodingerQuoteInfo.realQuote,
+        })
+      : setGameQuote({
+          quote: schrodingerQuoteInfo.fakeQuote,
+          answer: false,
+          author: schrodingerQuoteInfo.author,
+          realQuote: schrodingerQuoteInfo.realQuote,
+        });
+  } catch (error) {
+    console.log(error.message);
+    alert(error.message);
+  }
+}
+
 async function getQuoteAndArrayOfPossibleWordsToChange() {
-  const arrayOfTagsToSearchBy = ["life", "death", "happiness", "love", "wisdom", "inspirational", "motivational", "funny"]
+  const arrayOfTagsToSearchBy = [
+    "life",
+    "death",
+    "happiness",
+    "love",
+    "wisdom",
+    "inspirational",
+    "motivational",
+    "funny",
+  ];
   //pick a random tag to search by
-  let randomTag = arrayOfTagsToSearchBy[getRndInteger(0, arrayOfTagsToSearchBy.length)]
+  let randomTag =
+    arrayOfTagsToSearchBy[getRndInteger(0, arrayOfTagsToSearchBy.length)];
   //make fetch request just to find out how many pages there are
   const quotesResult = await searchBy2("tag", randomTag);
   //console.log(quotesResult);
@@ -159,35 +163,36 @@ async function checkAnswer(e, ansQuote, setGameQuote, gameQuote) {
 
   if (userRes === "Real") {
     if (ansQuote) {
-      alert("Correct! That was a real quote!")
+      alert("Correct! That was a real quote!");
+    } else {
+      alert(
+        `Incorrect! That was a fake quote. The actual quote is: "${gameQuote.realQuote}!"`
+      );
     }
-    else {
-      alert(`Incorrect! That was a fake quote. The actual quote is: "${gameQuote.realQuote}!"`)
-    }
-  }
-  else if (userRes === "Fake") {
+  } else if (userRes === "Fake") {
     if (!ansQuote) {
-      alert(`Correct! That was a fake quote. The actual quote is: "${gameQuote.realQuote}!"`)
-    }
-    else {
-      alert("Incorrect! That was a real quote!")
+      alert(
+        `Correct! That was a fake quote. The actual quote is: "${gameQuote.realQuote}!"`
+      );
+    } else {
+      alert("Incorrect! That was a real quote!");
     }
   }
 
   const schrodingerQuoteInfo = await getSchrodingerQuote(); // Schrodinger quote
   getRndInteger(0, 2) === 0
     ? setGameQuote({
-      quote: schrodingerQuoteInfo.realQuote,
-      author: schrodingerQuoteInfo.author,
-      answer: true,
-      realQuote: schrodingerQuoteInfo.realQuote,
-    })
+        quote: schrodingerQuoteInfo.realQuote,
+        author: schrodingerQuoteInfo.author,
+        answer: true,
+        realQuote: schrodingerQuoteInfo.realQuote,
+      })
     : setGameQuote({
-      quote: schrodingerQuoteInfo.fakeQuote,
-      answer: false,
-      author: schrodingerQuoteInfo.author,
-      realQuote: schrodingerQuoteInfo.realQuote,
-    });
+        quote: schrodingerQuoteInfo.fakeQuote,
+        answer: false,
+        author: schrodingerQuoteInfo.author,
+        realQuote: schrodingerQuoteInfo.realQuote,
+      });
 
   // [2] UPDATE STATE GENERATE NEW QUOTE
 
