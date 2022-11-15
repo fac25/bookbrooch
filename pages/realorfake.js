@@ -15,7 +15,14 @@ import {
   removePunctuationFromString,
   getAdjectivesAdverbs,
 } from "../general-helpers";
+
+import { Container, Heading, Text, Button, Flex } from "@chakra-ui/react";
+import Head from "next/head";
+// display first quote and hide form
+// useState for current quote
+// onclick listener for btn clicked = user response
 import { useState, useEffect } from "react";
+
 
 export default function RealOrFake() {
   const [gameQuote, setGameQuote] = useState({});
@@ -25,37 +32,35 @@ export default function RealOrFake() {
   }, []);
 
   return (
-    <main>
-      <h1>Real or fake</h1>
+    <Container  maxW="container.lg">
+      <Heading>Real or Fake</Heading>
       <section id="start-game">
-        <h2>Is this real?</h2>
-        <p>Test your knowledge with Spotting if a quote is real or not</p>
+        <Text fontSize={['1em','1.5em']} textAlign={[ 'left', 'center' ]}>Is the displayed quote real?</Text>
+        <Text fontSize={['1em','1.5em']} textAlign={[ 'left', 'center' ]} mb={9}>Test your knowledge with spotting if a quote is real or not</Text>
       </section>
       <section id="gameQuote">
-        <>
-          <div>
+          <Flex m={[0,'auto']} p={5} maxW={['container.sm', 'container.md']}flexDirection={"column"} justifyContent={'center'} alignItems={'center'} borderWidth={'1px'} shadow={"md"}>
             <p id="quote">{gameQuote.quote}</p>
             <p>- {gameQuote.author}</p>
-            <section>
-              <button
+            <Flex m={5} gap={4} alignItems='center' justifyContent={'center'}>
+              <Button
                 onClick={(e) =>
                   checkAnswer(e, gameQuote.answer, setGameQuote, gameQuote)
                 }
               >
                 Real
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={(e) =>
                   checkAnswer(e, gameQuote.answer, setGameQuote, gameQuote)
                 }
               >
                 Fake
-              </button>
-            </section>
-          </div>
-        </>
+              </Button>
+            </Flex>
+          </Flex>
       </section>
-    </main>
+    </Container>
   );
 }
 
