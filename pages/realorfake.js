@@ -16,12 +16,16 @@ import {
   getAdjectivesAdverbs,
 } from "../general-helpers";
 import { useState, useEffect } from "react";
+import Loader from "../components/Loader";
 
 export default function RealOrFake() {
   const [gameQuote, setGameQuote] = useState({});
+  const [loaderVisibile, setLoaderVisibile] = useState(true);
 
   useEffect(() => {
-    startGame(setGameQuote);
+    startGame(setGameQuote).then(() => {
+      setLoaderVisibile(false);
+    });
   }, []);
 
   return (
@@ -31,6 +35,7 @@ export default function RealOrFake() {
         <h2>Is this real?</h2>
         <p>Test your knowledge with Spotting if a quote is real or not</p>
       </section>
+      {loaderVisibile ? <Loader></Loader> : ""}
       <section id="gameQuote">
         <>
           <div>
