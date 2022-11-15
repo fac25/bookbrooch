@@ -18,6 +18,7 @@ export default function Quote({
       flexDirection="column"
       gap="5"
       boxShadow="md"
+      className="quote"
     >
       <Text as="p">{quote}</Text>
       <p>

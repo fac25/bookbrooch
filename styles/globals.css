@@ -19,6 +19,22 @@ li {
   list-style: none;
 }
 
+.quote:nth-child(even) {
+  transform: skewX(-10deg);
+}
+
+.quote:nth-child(even) > * {
+  transform: skewX(10deg);
+}
+
+.quote:nth-child(odd) {
+  transform: skewX(10deg);
+}
+
+.quote:nth-child(odd) > * {
+  transform: skewX(-10deg);
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
