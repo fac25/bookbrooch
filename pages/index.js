@@ -42,7 +42,7 @@ export default function Home() {
   }, []);
   return (
     <div>
-      <Container maxW="container.lg">
+      <Container maxW="container.lg" py="15px">
         <Search />
         <ul>
           {randomQuotes.map((quote, index) => {

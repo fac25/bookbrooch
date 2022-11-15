@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useAuth } from "../context/AuthContext";
 import DarkModeSwitch from "./DarkModeSwitch";
-import { Flex, Container, Box, Center } from "@chakra-ui/react";
+import { Flex, Container, Box, Text } from "@chakra-ui/react";
 
 const Navbar = ({ children }) => {
   const { user, logOut } = useAuth();
@@ -47,7 +47,9 @@ const Navbar = ({ children }) => {
             <Flex justify="space-between" align="center">
               <div>
                 <Link href="/">
-                  <span>Bookbrooch</span>
+                  <Text fontSize="2xl" fontWeight="bold">
+                    Bookbrooch
+                  </Text>
                 </Link>
               </div>
 
