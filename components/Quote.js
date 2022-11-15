@@ -1,5 +1,6 @@
 import { deleteQuote } from "../firebase/firestore";
 import { useState } from "react";
+import { VStack, Box, Heading, Text, Button } from "@chakra-ui/react";
 export default function Quote({
   quoteObj,
   userData = null,
@@ -8,19 +9,35 @@ export default function Quote({
 }) {
   const { quoteId, quote, author, source, tags = [] } = quoteObj;
   return (
-    <li>
-      <p>{quote}</p>
+    <Box
+      as="li"
+      p={5}
+      shadow="md"
+      borderWidth="1px"
+      display="flex"
+      flexDirection="column"
+      gap="5"
+      boxShadow="md"
+    >
+      <Text as="p">{quote}</Text>
       <p>
-        <span>{author}</span>-<span>{source}</span>
+        <Heading fontSize="md" as="span">
+          {author}
+        </Heading>{" "}
+        -{" "}
+        <Heading fontSize="md" as="span">
+          {source}
+        </Heading>
       </p>
       <p>
+        <span>Tags: </span>
         {tags.map((tag) =>
           tagIsButton ? (
-            <button onClick={(e) => setCategory(e.target.innerText)} key={tag}>
+            <Button onClick={(e) => setCategory(e.target.innerText)} key={tag}>
               {tag}
-            </button>
+            </Button>
           ) : (
-            <p key={tag}>{tag}</p>
+            <Button as="span">{tag}</Button>
           )
         )}
       </p>
@@ -34,6 +51,6 @@ export default function Quote({
           Delete
         </button>
       )}
-    </li>
+    </Box>
   );
 }

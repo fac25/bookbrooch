@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { searchBy } from "../public/api";
 import Quote from "../components/Quote";
+import { ChevronDownIcon } from "@chakra-ui/icons";
+import { Flex, Box, Button, Select, Input } from "@chakra-ui/react";
 
 export default function Search() {
   const [searchResults, setSearchResults] = useState([]);
@@ -27,33 +29,46 @@ export default function Search() {
 
   return (
     <>
-      <form action="" onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <input
-            type="text"
-            {...register("search", { required: "search is required" })}
-          />
-          {errors.search && <p>{errors.search.message}</p>}
-        </div>
-        <div>
-          <label htmlFor="tags">Search by category</label>
-          <select
-            id="tagsToSearchBy"
-            name="tagsToSearchBy"
-            {...register("tagsToSearchBy", {
-              required: "At least one tag is required",
-            })}
+      <Box minH="16" py="3">
+        <form action="" onSubmit={handleSubmit(onSubmit)}>
+          <Flex
+            justify="center"
+            minH="16"
+            align="center"
+            gap="4"
+            direction={{ base: "column", md: "row" }}
           >
-            <option value="tag">Keyword</option>
-            <option value="author">Author</option>
-            <option value="title">Title</option>
-          </select>
-          {errors.tags && <p>{errors.tags.message}</p>}
-        </div>
-        <div>
-          <button type="submit">submit</button>
-        </div>
-      </form>
+            <div>
+              {/* <label htmlFor="tags">Search by category</label> */}
+              <Select
+                placeholder="Search by category"
+                id="tagsToSearchBy"
+                name="tagsToSearchBy"
+                {...register("tagsToSearchBy", {
+                  required: "At least one tag is required",
+                })}
+              >
+                <option value="tag">Keyword</option>
+                <option value="author">Author</option>
+                <option value="title">Title</option>
+              </Select>
+              {errors.tags && <p>{errors.tags.message}</p>}
+            </div>
+            <div>
+              <Input
+                type="text"
+                {...register("search", { required: "search is required" })}
+                placeholder="Search..."
+              />
+              {errors.search && <p>{errors.search.message}</p>}
+            </div>
+
+            <div>
+              <Button type="submit">submit</Button>
+            </div>
+          </Flex>
+        </form>
+      </Box>
       <ul>
         {searchResults.map((quote, index) => {
           return <Quote key={quote.author + index} quoteObj={quote} />;

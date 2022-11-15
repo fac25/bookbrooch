@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import { Container } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import Quote from "../components/Quote";
 import Search from "../components/Search";
@@ -29,8 +30,8 @@ export default function Home() {
         let newRandomQuotes = [];
         slicedQuotes.forEach((element) => {
           newRandomQuotes.push({
-            author: element.author,
-            source: element.publication,
+            author: element.author.trim().replace(",", ""),
+            source: element.publication || " Publication unknown",
             quote: element.quote,
             tags: [dayTagPairs[day]],
           });
@@ -41,12 +42,14 @@ export default function Home() {
   }, []);
   return (
     <div>
-      <Search />
-      <ul>
-        {randomQuotes.map((quote, index) => {
-          return <Quote key={quote.author + index} quoteObj={quote} />;
-        })}
-      </ul>
+      <Container maxW="container.lg">
+        <Search />
+        <ul>
+          {randomQuotes.map((quote, index) => {
+            return <Quote key={quote.author + index} quoteObj={quote} />;
+          })}
+        </ul>
+      </Container>
     </div>
   );
 }
