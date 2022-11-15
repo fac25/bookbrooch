@@ -2,6 +2,7 @@ import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
+import UnprotectedRoute from "../components/UnprotectedRoute";
 // import { app } from "../firebase/initFireBase";
 // import {
 //   getFirestore,
@@ -49,39 +50,41 @@ const LoginPage = () => {
     }
   };
   return (
-    <div>
-      <h2>Log In</h2>
-      <FormProvider {...methods}>
-        <form action="" onSubmit={handleSubmit(onSubmit)}>
-          <div>
+    <UnprotectedRoute>
+      <div>
+        <h2>Log In</h2>
+        <FormProvider {...methods}>
+          <form action="" onSubmit={handleSubmit(onSubmit)}>
             <div>
-              <label htmlFor="">Email</label>
+              <div>
+                <label htmlFor="">Email</label>
+              </div>
+
+              <input
+                type="email"
+                {...register("email", { required: "Email is required" })}
+              />
+              {errors.email && <p>{errors.email.message}</p>}
+            </div>
+            <div>
+              <div>
+                <label htmlFor="">Password</label>
+              </div>
+
+              <input
+                type="password"
+                {...register("password", { required: "Password is required" })}
+              />
+              {errors.password && <p>{errors.password.message}</p>}
             </div>
 
-            <input
-              type="email"
-              {...register("email", { required: "Email is required" })}
-            />
-            {errors.email && <p>{errors.email.message}</p>}
-          </div>
-          <div>
             <div>
-              <label htmlFor="">Password</label>
+              <button type="submit">submit</button>
             </div>
-
-            <input
-              type="password"
-              {...register("password", { required: "Password is required" })}
-            />
-            {errors.password && <p>{errors.password.message}</p>}
-          </div>
-
-          <div>
-            <button type="submit">submit</button>
-          </div>
-        </form>
-      </FormProvider>
-    </div>
+          </form>
+        </FormProvider>
+      </div>
+    </UnprotectedRoute>
   );
 };
 
