@@ -13,6 +13,8 @@ import {
   Flex,
   Container,
 } from "@chakra-ui/react";
+import { addNewUserToDB } from "../firebase/firestore"
+import UnprotectedRoute from "../components/UnprotectedRoute";
 
 const SignupPage = () => {
   const {
@@ -41,6 +43,7 @@ const SignupPage = () => {
     }
   };
   return (
+<UnprotectedRoute>
     <Container>
       <Flex minH="80vh" width="full" align="center" justifyContent="center">
         <Box p={5} width="xl" borderWidth="1px" shadow="md">
@@ -114,6 +117,7 @@ const SignupPage = () => {
         </Box>
       </Flex>
     </Container>
+    </UnprotectedRoute>
   );
 };
 

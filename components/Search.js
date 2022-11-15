@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { searchBy } from "../public/api";
+import { searchBy } from "../api-helpers";
 import Quote from "../components/Quote";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Flex, Box, Button, Select, Input } from "@chakra-ui/react";

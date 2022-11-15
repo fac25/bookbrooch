@@ -13,6 +13,7 @@ import {
   Flex,
   Container,
 } from "@chakra-ui/react";
+import UnprotectedRoute from "../components/UnprotectedRoute";
 
 const LoginPage = () => {
   const { logIn } = useAuth();
@@ -52,6 +53,8 @@ const LoginPage = () => {
     }
   };
   return (
+  
+<UnprotectedRoute>
     <Container>
       <Flex minH="80vh" width="full" align="center" justifyContent="center">
         <Box p={5} width="xl" borderWidth="1px" shadow="md">
@@ -112,6 +115,7 @@ const LoginPage = () => {
         </Box>
       </Flex>
     </Container>
+</UnprotectedRoute>
   );
 };
 
