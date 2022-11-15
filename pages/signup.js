@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
 import { use } from "react";
 import { addNewUserToDB } from "../firebase/firestore"
+import UnprotectedRoute from "../components/UnprotectedRoute";
 
 const SignupPage = () => {
   const {
@@ -31,33 +32,35 @@ const SignupPage = () => {
     }
   };
   return (
-    <div>
-      <h2>Sign Up</h2>
-      <form action="" onSubmit={handleSubmit(onSubmit)}>
-        <div>
+    <UnprotectedRoute>
+      <div>
+        <h2>Sign Up</h2>
+        <form action="" onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <label htmlFor="name">Name</label>
+            <div>
+              <label htmlFor="name">Name</label>
+            </div>
+            <input type="text" id="name" {...register("name")} />
           </div>
-          <input type="text" id="name" {...register("name")} />
-        </div>
-        <div>
           <div>
-            <label htmlFor="email">Email</label>
+            <div>
+              <label htmlFor="email">Email</label>
+            </div>
+            <input type="email" id="email" {...register("email")} />
           </div>
-          <input type="email" id="email" {...register("email")} />
-        </div>
-        <div>
           <div>
-            <label htmlFor="password">Password</label>
-          </div>
+            <div>
+              <label htmlFor="password">Password</label>
+            </div>
 
-          <input type="password" id="password" {...register("password")} />
-        </div>
-        <div>
-          <button type="submit">submit</button>
-        </div>
-      </form>
-    </div>
+            <input type="password" id="password" {...register("password")} />
+          </div>
+          <div>
+            <button type="submit">submit</button>
+          </div>
+        </form>
+      </div>
+    </UnprotectedRoute>
   );
 };
 
