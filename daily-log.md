@@ -92,4 +92,8 @@ Firebase (return the id of a newly added document)
 - Added Theme feature with Chakra ui.
 
 
+## 15-11-2022
 
+### Testing
+- Cypress doesn't work with newest version of NextJS (13) so we reverted back to version 12.0.0
+- Server needs to run so cyrpess can use it 
