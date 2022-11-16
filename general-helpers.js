@@ -28,4 +28,21 @@ function getAdjectivesAdverbs(sentence) {
   return wordsToReturn;
 }
 
-export { getRndInteger, removePunctuationFromString, getAdjectivesAdverbs };
+function getFourUniqueRandomIntegers(min, max) {
+  let arrayOfFourUniqueRandomIntegers = [];
+  for (let i = 0; arrayOfFourUniqueRandomIntegers.length < 4; i++) {
+    let newNumber = getRndInteger(min, max);
+    if (!arrayOfFourUniqueRandomIntegers.includes(newNumber)) {
+      arrayOfFourUniqueRandomIntegers.push(newNumber);
+    }
+  }
+  //console.log(arrayOfFourUniqueRandomIntegers);
+  return arrayOfFourUniqueRandomIntegers;
+}
+
+export {
+  getRndInteger,
+  removePunctuationFromString,
+  getAdjectivesAdverbs,
+  getFourUniqueRandomIntegers,
+};
