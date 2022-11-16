@@ -53,69 +53,70 @@ const LoginPage = () => {
     }
   };
   return (
-  
-<UnprotectedRoute>
-    <Container>
-      <Flex minH="80vh" width="full" align="center" justifyContent="center">
-        <Box p={5} width="xl" borderWidth="1px" shadow="md">
-          <Box textAlign="center">
-            <Heading mb="20px">logIn</Heading>
+    <UnprotectedRoute>
+      <Container>
+        <Flex minH="80vh" width="full" align="center" justifyContent="center">
+          <Box p={5} width="xl" borderWidth="1px" shadow="md">
+            <Box textAlign="center">
+              <Heading as="h1" mb="20px">
+                Log In
+              </Heading>
+            </Box>
+            <FormProvider {...methods}>
+              <form action="" onSubmit={handleSubmit(onSubmit)}>
+                <Stack
+                  spacing="3"
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                >
+                  <FormControl
+                    display="flex"
+                    flexDirection={{ base: "column", md: "row" }}
+                    alignItems="center"
+                  >
+                    <FormLabel minW="20" textAlign="center">
+                      <label htmlFor="">Email</label>
+                    </FormLabel>
+
+                    <Input
+                      type="email"
+                      {...register("email", { required: "Email is required" })}
+                      size="lg"
+                    />
+                    {errors.email && <p>{errors.email.message}</p>}
+                  </FormControl>
+                  <FormControl
+                    display="flex"
+                    flexDirection={{ base: "column", md: "row" }}
+                    alignItems="center"
+                  >
+                    <FormLabel minW="20" textAlign="center">
+                      <label htmlFor="">Password</label>
+                    </FormLabel>
+
+                    <Input
+                      type="password"
+                      {...register("password", {
+                        required: "Password is required",
+                      })}
+                      size="lg"
+                    />
+                    {errors.password && <p>{errors.password.message}</p>}
+                  </FormControl>
+
+                  <div>
+                    <Button type="submit" minWidth={{ base: "full", md: "48" }}>
+                      submit
+                    </Button>
+                  </div>
+                </Stack>
+              </form>
+            </FormProvider>
           </Box>
-          <FormProvider {...methods}>
-            <form action="" onSubmit={handleSubmit(onSubmit)}>
-              <Stack
-                spacing="3"
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-              >
-                <FormControl
-                  display="flex"
-                  flexDirection={{ base: "column", md: "row" }}
-                  alignItems="center"
-                >
-                  <FormLabel minW="20" textAlign="center">
-                    <label htmlFor="">Email</label>
-                  </FormLabel>
-
-                  <Input
-                    type="email"
-                    {...register("email", { required: "Email is required" })}
-                    size="lg"
-                  />
-                  {errors.email && <p>{errors.email.message}</p>}
-                </FormControl>
-                <FormControl
-                  display="flex"
-                  flexDirection={{ base: "column", md: "row" }}
-                  alignItems="center"
-                >
-                  <FormLabel minW="20" textAlign="center">
-                    <label htmlFor="">Password</label>
-                  </FormLabel>
-
-                  <Input
-                    type="password"
-                    {...register("password", {
-                      required: "Password is required",
-                    })}
-                    size="lg"
-                  />
-                  {errors.password && <p>{errors.password.message}</p>}
-                </FormControl>
-
-                <div>
-                  <Button type="submit" minWidth={{ base: "full", md: "48" }}>
-                    submit
-                  </Button>
-                </div>
-              </Stack>
-            </form>
-          </FormProvider>
-        </Box>
-      </Flex>
-    </Container>
-</UnprotectedRoute>
+        </Flex>
+      </Container>
+    </UnprotectedRoute>
   );
 };
 

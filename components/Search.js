@@ -4,9 +4,12 @@ import { searchBy } from "../api-helpers";
 import Quote from "../components/Quote";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Flex, Box, Button, Select, Input } from "@chakra-ui/react";
+import { useAuth } from "../context/AuthContext";
 
 export default function Search() {
   const [searchResults, setSearchResults] = useState([]);
+
+  const { user } = useAuth();
 
   const {
     register,
@@ -71,7 +74,14 @@ export default function Search() {
       </Box>
       <ul>
         {searchResults.map((quote, index) => {
-          return <Quote key={quote.author + index} quoteObj={quote} />;
+          return (
+            <Quote
+              key={quote.author + index}
+              quoteObj={quote}
+              home={true}
+              user={user}
+            />
+          );
         })}
       </ul>
     </>

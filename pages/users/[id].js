@@ -10,6 +10,7 @@ import SaveQuoteForm from "../../components/saveQuoteForm";
 import { onSnapshot, collection } from "firebase/firestore";
 import Quote from "../../components/Quote";
 import FilterQuotesForm from "../../components/FilterQuotesForm";
+import { Container, Heading } from "@chakra-ui/react";
 
 //import getUser function from firebase/firestore.js
 export async function getServerSideProps({ params }) {
@@ -99,45 +100,49 @@ const DashboardPage = ({ userData }) => {
 
   return (
     <ProtectedRoute>
-      <h1>{userData.name}</h1>
-      <SaveQuoteForm></SaveQuoteForm>
-      <section>
-        {/* {console.log(quotes)} */}
-        <FilterQuotesForm setCategory={setCategory}></FilterQuotesForm>
-        <ul>
-          {filteredQuotes.map((quoteObj) => {
-            const { author, source, quote, quoteId, tags } = quoteObj;
-            return (
-              <Quote
-                key={quoteId}
-                userData={userData}
-                quoteObj={quoteObj}
-                tagIsButton={true}
-                setCategory={setCategory}
-              />
-              // <li>
-              //   <p>{quote}</p>
-              //   <p>
-              //     <span>{author}</span>-<span>{source}</span>
-              //   </p>
-              //   <p>
-              //     {tags.map((tag) => (
-              //       <button key={tag}>{tag}</button>
-              //     ))}
-              //   </p>
-              //   <button
-              //     onClick={() => {
-              //       console.log(quoteId, userData.userId);
-              //       deleteQuote(userData.userId, quoteId);
-              //     }}
-              //   >
-              //     Delete
-              //   </button>
-              // </li>
-            );
-          })}
-        </ul>
-      </section>
+      <Container maxW="container.lg">
+        <Heading as="h1" size="lg" mb="25px" textAlign="center">
+          {userData.name}
+        </Heading>
+        <SaveQuoteForm></SaveQuoteForm>
+        <section>
+          {/* {console.log(quotes)} */}
+          <FilterQuotesForm setCategory={setCategory}></FilterQuotesForm>
+          <ul>
+            {filteredQuotes.map((quoteObj) => {
+              const { author, source, quote, quoteId, tags } = quoteObj;
+              return (
+                <Quote
+                  key={quoteId}
+                  userData={userData}
+                  quoteObj={quoteObj}
+                  tagIsButton={true}
+                  setCategory={setCategory}
+                />
+                // <li>
+                //   <p>{quote}</p>
+                //   <p>
+                //     <span>{author}</span>-<span>{source}</span>
+                //   </p>
+                //   <p>
+                //     {tags.map((tag) => (
+                //       <button key={tag}>{tag}</button>
+                //     ))}
+                //   </p>
+                //   <button
+                //     onClick={() => {
+                //       console.log(quoteId, userData.userId);
+                //       deleteQuote(userData.userId, quoteId);
+                //     }}
+                //   >
+                //     Delete
+                //   </button>
+                // </li>
+              );
+            })}
+          </ul>
+        </section>
+      </Container>
     </ProtectedRoute>
   );
 };

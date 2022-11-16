@@ -7,7 +7,7 @@ import { Flex, Container, Box, Text, Button } from "@chakra-ui/react";
 import styles from "./Navbar.module.css";
 
 const Navbar = ({ children }) => {
-  const { user, logOut } = useAuth();
+  const { user, logOut, setUser } = useAuth();
   const router = useRouter();
   const [isNavActive, setIsNavActive] = useState(false);
   const menuItems = [
@@ -36,6 +36,7 @@ const Navbar = ({ children }) => {
   const handleLogout = async () => {
     try {
       await logOut();
+      setUser(null);
       router.push("/");
     } catch (error) {
       console.log(error.message);

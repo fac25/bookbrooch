@@ -1,11 +1,12 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import { Container } from "@chakra-ui/react";
+import { Container, Heading, Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import Quote from "../components/Quote";
 import Search from "../components/Search";
 import Loader from "../components/Loader";
+import { useAuth } from "../context/AuthContext";
 
 export default function Home() {
   let dayTagPairs = {
@@ -43,22 +44,41 @@ export default function Home() {
         setLoaderVisible(false);
       });
   }, []);
+
+  const { user } = useAuth();
+
   return (
     <div>
       <Container maxW="container.lg" py="15px">
-        <Search />
-        {loaderVisible ? <Loader></Loader> : ""}
-        {loaderVisible === false ? (
-          <div>
+        <Heading as="h1" size="lg" textAlign="center">
+          Quotes to feed your curiousity
+        </Heading>
+        <section>
+          <Box borderWidth="1px" p="5" my="20px" borderRadius="5px">
+            <Heading as="h2" size="md" textAlign="center">
+              Search for a quote
+            </Heading>
+            <Search />
+          </Box>
+
+          {loaderVisible ? <Loader></Loader> : ""}
+          {loaderVisible === false ? (
             <ul>
               {randomQuotes.map((quote, index) => {
-                return <Quote key={quote.author + index} quoteObj={quote} />;
+                return (
+                  <Quote
+                    key={quote.author + index}
+                    quoteObj={quote}
+                    home={true}
+                    user={user}
+                  />
+                );
               })}
             </ul>
-          </div>
-        ) : (
-          ""
-        )}
+          ) : (
+            ""
+          )}
+        </section>
       </Container>
     </div>
   );
