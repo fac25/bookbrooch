@@ -7,6 +7,7 @@ import {
   db,
 } from "../../firebase/firestore";
 import SaveQuoteForm from "../../components/saveQuoteForm";
+import InARowBadge from "../../components/badges/InARowBadge";
 import { onSnapshot, collection } from "firebase/firestore";
 import Quote from "../../components/Quote";
 import FilterQuotesForm from "../../components/FilterQuotesForm";
@@ -48,6 +49,7 @@ export async function getServerSideProps({ params }) {
 }
 
 const DashboardPage = ({ userData }) => {
+  const currentUser = userData.userId
   // const [quotes, setQuotes] = useState(userData.quotes);
 
   // const onDelete = (quoteId) => {
@@ -94,12 +96,15 @@ const DashboardPage = ({ userData }) => {
   category === "all"
     ? (filteredQuotes = quotes)
     : (filteredQuotes = quotes.filter((q) => {
-        return q.tags.includes(category);
-      }));
+      return q.tags.includes(category);
+    }));
 
   return (
     <ProtectedRoute>
-      <h1>{userData.name}</h1>
+      <h1>Username: {userData.name}</h1>
+      <div>Badges:
+        <InARowBadge userId={currentUser} />
+      </div>
       <SaveQuoteForm></SaveQuoteForm>
       <section>
         {/* {console.log(quotes)} */}

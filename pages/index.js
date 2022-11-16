@@ -27,7 +27,7 @@ export default function Home() {
         return res.json();
       })
       .then((data) => {
-        console.log(data.quotes[0].quote);
+        //console.log(data.quotes[0].quote);
         let slicedQuotes = data.quotes.slice(0, 5);
         let newRandomQuotes = [];
         slicedQuotes.forEach((element) => {
