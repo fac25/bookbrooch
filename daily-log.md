@@ -103,7 +103,9 @@ Firebase (return the id of a newly added document)
 - Continued Styling the app.
 - Added some tests.
 - Add a loader to some of the pages.
-
+- Testing
+  - Cypress doesn't work with newest version of NextJS (13) so we reverted back to version 12.0.0
+  - Server needs to run so cyrpess can use it 
 
 ## 16-11-2022
 
@@ -115,12 +117,6 @@ Firebase (return the id of a newly added document)
 - [ ] Guess the author game (A/Y)
 - [ ] Fill in the blank game (A/Y)
 - [ ] MERGE b4 code review!!!
-
-
-
-
-
-
 
 
 
