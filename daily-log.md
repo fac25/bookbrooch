@@ -105,4 +105,24 @@ Firebase (return the id of a newly added document)
 - Add a loader to some of the pages.
 
 
+## 16-11-2022
+
+### Things to do today
+
+- [ ] Test every page (S)
+- [ ] Get started on badges (M)
+- [ ] Save quote from homepage (A)
+- [ ] Guess the author game (A/Y)
+- [ ] Fill in the blank game (A/Y)
+- [ ] MERGE b4 code review!!!
+
+
+
+
+
+
+
+
+
+
 
