@@ -9,11 +9,12 @@ export default function Quote({
   home = false,
   user = null,
 }) {
-  const { quoteId, quote, author, source, tags = [] } = quoteObj;
+  const { quoteId, quote, author, source, tags = ["happy"] } = quoteObj;
   return (
     <Box
       as="li"
-      p={5}
+      w="full"
+      p="5"
       shadow="md"
       borderWidth="1px"
       display="flex"
@@ -32,18 +33,24 @@ export default function Quote({
           {source}
         </Heading>
       </p>
-      <p>
-        <span>Tags: </span>
-        {tags.map((tag) =>
-          tagIsButton ? (
-            <Button onClick={(e) => setCategory(e.target.innerText)} key={tag}>
-              {tag}
-            </Button>
-          ) : (
-            <Button as="span">{tag}</Button>
-          )
-        )}
-      </p>
+      {tags.length > 0 && (
+        <p>
+          <span>Tags: </span>
+          {tags.map((tag) =>
+            tagIsButton ? (
+              <Button
+                onClick={(e) => setCategory(e.target.innerText)}
+                key={tag}
+              >
+                {tag}
+              </Button>
+            ) : (
+              <Button as="span">{tag}</Button>
+            )
+          )}
+        </p>
+      )}
+
       {userData && (
         <Button
           onClick={() => {

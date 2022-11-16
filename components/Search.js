@@ -3,7 +3,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { searchBy } from "../api-helpers";
 import Quote from "../components/Quote";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { Flex, Box, Button, Select, Input } from "@chakra-ui/react";
+import { Flex, Box, Button, Select, Input, Heading } from "@chakra-ui/react";
 import { useAuth } from "../context/AuthContext";
 
 export default function Search() {
@@ -32,8 +32,8 @@ export default function Search() {
 
   return (
     <>
-      <Box minH="16" py="3">
-        <form action="" onSubmit={handleSubmit(onSubmit)}>
+      <form action="" onSubmit={handleSubmit(onSubmit)}>
+        <Box minH="16" py="3">
           <Flex
             justify="center"
             minH="16"
@@ -70,20 +70,27 @@ export default function Search() {
               <Button type="submit">submit</Button>
             </div>
           </Flex>
-        </form>
-      </Box>
-      <ul>
-        {searchResults.map((quote, index) => {
-          return (
-            <Quote
-              key={quote.author + index}
-              quoteObj={quote}
-              home={true}
-              user={user}
-            />
-          );
-        })}
-      </ul>
+        </Box>
+      </form>
+      {searchResults.length > 1 && (
+        <section>
+          <Heading as="p" size="md" textAlign="center" mb="15px">
+            Search results:
+          </Heading>
+          <ul>
+            {searchResults.map((quote, index) => {
+              return (
+                <Quote
+                  key={quote.author + index}
+                  quoteObj={quote}
+                  home={true}
+                  user={user}
+                />
+              );
+            })}
+          </ul>
+        </section>
+      )}
     </>
   );
 }

@@ -54,27 +54,30 @@ export default function Home() {
           Quotes to feed your curiousity
         </Heading>
         <section>
-          <Box borderWidth="1px" p="5" my="20px" borderRadius="5px">
-            <Heading as="h2" size="md" textAlign="center">
-              Search for a quote
-            </Heading>
-            <Search />
-          </Box>
+          <Heading as="h2" size="md" textAlign="center">
+            Search for a quote
+          </Heading>
+          <Search />
 
           {loaderVisible ? <Loader></Loader> : ""}
           {loaderVisible === false ? (
-            <ul>
-              {randomQuotes.map((quote, index) => {
-                return (
-                  <Quote
-                    key={quote.author + index}
-                    quoteObj={quote}
-                    home={true}
-                    user={user}
-                  />
-                );
-              })}
-            </ul>
+            <section>
+              <Heading as="h2" size="md" textAlign="center" my="15px">
+                Quotes of the day
+              </Heading>
+              <ul>
+                {randomQuotes.map((quote, index) => {
+                  return (
+                    <Quote
+                      key={quote.author + index}
+                      quoteObj={quote}
+                      home={true}
+                      user={user}
+                    />
+                  );
+                })}
+              </ul>
+            </section>
           ) : (
             ""
           )}
