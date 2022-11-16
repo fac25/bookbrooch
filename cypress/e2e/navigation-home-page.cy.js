@@ -1,17 +1,37 @@
-describe('My First Test', () => {
-  it('Search for a quote returns correct quote', () => {
-    cy.visit('http://localhost:3000')
-    cy.get("header").should("contain", "Home")
+context("Navigation", () => {
+  beforeEach(() => {
+    cy.visit("http://localhost:3000");
+  });
 
-    // cy.get("#tagsToSearchBy").contains("Title")
+  it("Contains all Nav elements", () => {
+    cy.get("nav").contains("Home");
+    cy.get("nav").contains("Login");
+    cy.get("nav").contains("Sign Up");
+    cy.get("nav").contains("Game");
+  });
 
-    // cy.get("#tagsToSearchBy").contains("Keyword")
+  it("Home click takes to route '/'", () => {
+    cy.get("nav").contains("Home").click();
+    cy.location("pathname").should("include", "");
+  });
 
-    // cy.get("#tagsToSearchBy").select("Keyword")
+  it("Login click takes to route '/login'", () => {
+    cy.get("nav").contains("Login").click();
+    cy.location("pathname").should("include", "login");
+  });
 
+  it("Sign Up click takes to route '/signup'", () => {
+    cy.get("nav").contains("Sign Up").click();
+    cy.location("pathname").should("include", "signup");
+  });
 
-    // cy.get("input").type("tree")
-    // cy.contains("submit").click()
-    // cy.get("ul").contains("I Am VerticalBut I would rather be horizontal.")
-  })
-})
+  it("Login click takes to route '/game'", () => {
+    cy.get("nav").contains("Game").click();
+    cy.location("pathname").should("include", "game");
+  });
+
+  it("Logo Click takes to home route '/'", () => {
+    cy.get("#logo").contains("Bookbrooch").click();
+    cy.location("pathname").should("include", "");
+  });
+});
