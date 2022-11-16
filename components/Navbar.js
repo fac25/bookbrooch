@@ -1,12 +1,15 @@
 import Link from "next/link";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "../context/AuthContext";
 import DarkModeSwitch from "./DarkModeSwitch";
-import { Flex, Container, Box, Text } from "@chakra-ui/react";
+import { Flex, Container, Box, Text, Button } from "@chakra-ui/react";
+import styles from "./Navbar.module.css";
 
 const Navbar = ({ children }) => {
   const { user, logOut } = useAuth();
   const router = useRouter();
+  const [isNavActive, setIsNavActive] = useState(false);
   const menuItems = [
     {
       id: 1,
@@ -54,37 +57,53 @@ const Navbar = ({ children }) => {
               </div>
 
               <nav>
-                <ul>
-                  <Flex gap="2" align="center">
-                    <>
-                      {!user?.uid ? (
-                        <>
-                          {menuItems.map((item) => (
-                            <li key={item.id}>
-                              <Link href={item?.link}>{item?.name}</Link>
-                            </li>
-                          ))}
-                        </>
-                      ) : (
-                        <>
-                          <li>
-                            <Link href={`/users/${user.uid}`}>Dashboard</Link>
+                <ul
+                  className={`${styles.nav} ${
+                    isNavActive ? styles.active : ""
+                  }`}
+                >
+                  <>
+                    {!user?.uid ? (
+                      <>
+                        {menuItems.map((item) => (
+                          <li key={item.id}>
+                            <Link href={item?.link}>{item?.name}</Link>
                           </li>
-                          <li>
-                            <Link href={`/game`}>Game</Link>
-                          </li>
-                          <li>
-                            <a onClick={handleLogout}>Logout</a>
-                          </li>
-                        </>
-                      )}
-                    </>
-                    <li>
-                      <DarkModeSwitch />
-                    </li>
-                  </Flex>
+                        ))}
+                      </>
+                    ) : (
+                      <>
+                        <li>
+                          <Link href={`/users/${user.uid}`}>Dashboard</Link>
+                        </li>
+                        <li>
+                          <Link href={`/game`}>Game</Link>
+                        </li>
+                        <li>
+                          <a onClick={handleLogout}>Logout</a>
+                        </li>
+                      </>
+                    )}
+                  </>
                 </ul>
               </nav>
+              <div>
+                <DarkModeSwitch />
+                <Button
+                  display={{ base: "inline-flex", md: "none" }}
+                  position="relative"
+                  zIndex="1100"
+                  aria-label="Toggle menu"
+                  ml="5px"
+                  p="3"
+                  className={`${styles["nav-btn"]} ${
+                    isNavActive ? styles.active : ""
+                  }`}
+                  onClick={() => setIsNavActive(!isNavActive)}
+                >
+                  <span aria-hidden></span>
+                </Button>
+              </div>
             </Flex>
           </Container>
         </header>
