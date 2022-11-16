@@ -12,6 +12,7 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { async } from "@firebase/util";
+import { value } from "pos/lexicon.js";
 
 const db = getFirestore(app);
 
@@ -159,57 +160,46 @@ async function InARow(userId) {
 async function favTag(userId) {
   //console.log("Firebase userId: " + userId)
   let favouriteTag = "none"
-  // get all quotes
+  // Get all quotes
   const userQuotes = await getUserQuotes(userId)
-  // get all quotes.tag
-  // return biggest number of tags, if equal return all
-
   // Return array of all tags used
   let tags = []
   userQuotes.forEach(quote => tags.push(quote.tags))
   tags = tags.flat()
-  //console.log(tags)
+  console.log(tags)
+  // Output: [ "Happiness", "Happiness", "Funny", "Inspirational", "Funny" ]
 
-
-  // Create stats for mostly used tags
+  // Create stats object for mostly used tags
   const countKeysUsed = {};
   tags.forEach(element => {
     countKeysUsed[element] = (countKeysUsed[element] || 0) + 1;
   });
-  //console.log(countKeysUsed)
+  console.log(countKeysUsed)
   // Output: {Wisdom: 3, Inspirational: 2, Life: 1}
 
   // Find highest number of used
   let valuesArray = Object.values(countKeysUsed);
-  let max = Math.max(...valuesArray);
-  //console.log(max);
+  // console.log(valuesArray)
+  // Output [ 2, 2, 1 ]
+  let maxPointsForTag = Math.max(...valuesArray);
+  console.log(`Max is: ${maxPointsForTag}`);
+  // Output: Max is: 2
 
   // Search by value return key 
-  // ======================================== TO DO IM HERE ========================================
-  function getKeyByValue(object, value) {
-    let a = 0
-    let b = 0
-    let same = []
-    do {
-
-      // Find first key
-      a = Object.keys(object).find(key => object[key] === value);
-      same.push(a)
-      object[a] = 0;
-      // Find any key that's the same
-      b = Object.keys(object).find(key => object[key] === value);
-      object[a] = 0;
-      if (a == b) {
-        same.push(b)
-      }
-    }
-    while (a == b)
-    return same
-
+  function getKeyByValue(object) {
+    let same = {}
+    Object.keys(object).forEach(tag => {
+      let freq = object[tag] // Wisdom, Inspirational, Life
+      if (!same[freq]) same[freq] = [] // 3: []
+      same[freq].push(tag) // 3: [Wisdom, Inspirational]
+    })
+    return same[maxPointsForTag]
   }
-  console.log(getKeyByValue(countKeysUsed, max));
-  return favouriteTag
+  const mostPopularQuotes = getKeyByValue(countKeysUsed);
+  //console.log(mostPopularQuotes)
+  return mostPopularQuotes
 }
+// Output [Wisdom, Inspirational]
 
 favTag("NWkrRsxJHEPucwaCUVsSFUPJOrI3")
 
@@ -222,5 +212,6 @@ export {
   getUsername,
   deleteQuote,
   InARow,
+  favTag,
   db,
 };
