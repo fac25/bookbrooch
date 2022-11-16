@@ -5,6 +5,7 @@ import { Container } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import Quote from "../components/Quote";
 import Search from "../components/Search";
+import Loader from "../components/Loader";
 
 export default function Home() {
   let dayTagPairs = {
@@ -17,6 +18,7 @@ export default function Home() {
     6: "friends",
   };
   const [randomQuotes, setRandomQuotes] = useState([]);
+  const [loaderVisible, setLoaderVisible] = useState(true);
   useEffect(() => {
     let day = new Date().getDay();
     console.log(day);
@@ -38,17 +40,25 @@ export default function Home() {
         });
 
         setRandomQuotes(newRandomQuotes);
+        setLoaderVisible(false);
       });
   }, []);
   return (
     <div>
-      <Container maxW="container.lg">
+      <Container maxW="container.lg" py="15px">
         <Search />
-        <ul>
-          {randomQuotes.map((quote, index) => {
-            return <Quote key={quote.author + index} quoteObj={quote} />;
-          })}
-        </ul>
+        {loaderVisible ? <Loader></Loader> : ""}
+        {loaderVisible === false ? (
+          <div>
+            <ul>
+              {randomQuotes.map((quote, index) => {
+                return <Quote key={quote.author + index} quoteObj={quote} />;
+              })}
+            </ul>
+          </div>
+        ) : (
+          ""
+        )}
       </Container>
     </div>
   );

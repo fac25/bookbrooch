@@ -2,15 +2,18 @@ import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
+import {
+  Input,
+  Stack,
+  Button,
+  FormControl,
+  FormLabel,
+  Box,
+  Heading,
+  Flex,
+  Container,
+} from "@chakra-ui/react";
 import UnprotectedRoute from "../components/UnprotectedRoute";
-// import { app } from "../firebase/initFireBase";
-// import {
-//   getFirestore,
-//   collection,
-//   getDocs,
-//   setDoc,
-//   doc,
-// } from "firebase/firestore";
 
 const LoginPage = () => {
   const { logIn } = useAuth();
@@ -50,41 +53,69 @@ const LoginPage = () => {
     }
   };
   return (
-    <UnprotectedRoute>
-      <div>
-        <h2>Log In</h2>
-        <FormProvider {...methods}>
-          <form action="" onSubmit={handleSubmit(onSubmit)}>
-            <div>
-              <div>
-                <label htmlFor="">Email</label>
-              </div>
+  
+<UnprotectedRoute>
+    <Container>
+      <Flex minH="80vh" width="full" align="center" justifyContent="center">
+        <Box p={5} width="xl" borderWidth="1px" shadow="md">
+          <Box textAlign="center">
+            <Heading mb="20px">logIn</Heading>
+          </Box>
+          <FormProvider {...methods}>
+            <form action="" onSubmit={handleSubmit(onSubmit)}>
+              <Stack
+                spacing="3"
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+              >
+                <FormControl
+                  display="flex"
+                  flexDirection={{ base: "column", md: "row" }}
+                  alignItems="center"
+                >
+                  <FormLabel minW="20" textAlign="center">
+                    <label htmlFor="">Email</label>
+                  </FormLabel>
 
-              <input
-                type="email"
-                {...register("email", { required: "Email is required" })}
-              />
-              {errors.email && <p>{errors.email.message}</p>}
-            </div>
-            <div>
-              <div>
-                <label htmlFor="">Password</label>
-              </div>
+                  <Input
+                    type="email"
+                    {...register("email", { required: "Email is required" })}
+                    size="lg"
+                  />
+                  {errors.email && <p>{errors.email.message}</p>}
+                </FormControl>
+                <FormControl
+                  display="flex"
+                  flexDirection={{ base: "column", md: "row" }}
+                  alignItems="center"
+                >
+                  <FormLabel minW="20" textAlign="center">
+                    <label htmlFor="">Password</label>
+                  </FormLabel>
 
-              <input
-                type="password"
-                {...register("password", { required: "Password is required" })}
-              />
-              {errors.password && <p>{errors.password.message}</p>}
-            </div>
+                  <Input
+                    type="password"
+                    {...register("password", {
+                      required: "Password is required",
+                    })}
+                    size="lg"
+                  />
+                  {errors.password && <p>{errors.password.message}</p>}
+                </FormControl>
 
-            <div>
-              <button type="submit">submit</button>
-            </div>
-          </form>
-        </FormProvider>
-      </div>
-    </UnprotectedRoute>
+                <div>
+                  <Button type="submit" minWidth={{ base: "full", md: "48" }}>
+                    submit
+                  </Button>
+                </div>
+              </Stack>
+            </form>
+          </FormProvider>
+        </Box>
+      </Flex>
+    </Container>
+</UnprotectedRoute>
   );
 };
 
