@@ -50,7 +50,12 @@ const Navbar = ({ children }) => {
             <Flex justify="space-between" align="center">
               <div>
                 <Link href="/">
-                  <Text fontSize="2xl" fontWeight="bold">
+                  <Text
+                    id={"logo"}
+                    fontSize="2xl"
+                    fontWeight="bold"
+                    cursor={"pointer"}
+                  >
                     Bookbrooch
                   </Text>
                 </Link>
