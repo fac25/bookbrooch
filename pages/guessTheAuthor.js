@@ -14,19 +14,10 @@ export default function GuessTheAuthor() {
   const [loaderVisible, setLoaderVisible] = useState(true);
   const [authorUserChose, setAuthorUserChose] = useState("");
   const [fourUniqueRandomIntegers, setFourUniqueRandomIntegers] = useState(
-    getFourUniqueRandomIntegers()
+    getFourUniqueRandomIntegers(0, 4)
   );
   useEffect(() => {
-    getQuoteAndThreeOtherAuthors(setLoaderVisible).then(
-      (quotesPlusAuthorsObj) => {
-        setActualQuoteObj(quotesPlusAuthorsObj.randomQuoteObj);
-        setAuthorsArray(
-          quotesPlusAuthorsObj.incorrectAuthors.concat(
-            quotesPlusAuthorsObj.randomQuoteObj.author
-          )
-        );
-      }
-    );
+    startGame(setLoaderVisible, setActualQuoteObj, setAuthorsArray);
   }, []);
   return (
     <div>
@@ -41,13 +32,18 @@ export default function GuessTheAuthor() {
             optionB={authorsArray[fourUniqueRandomIntegers[1]]}
             optionC={authorsArray[fourUniqueRandomIntegers[2]]}
             optionD={authorsArray[fourUniqueRandomIntegers[3]]}
+            actualQuoteObj={actualQuoteObj}
+            authorUserChose={authorUserChose}
             setAuthorUserChose={setAuthorUserChose}
+            setLoaderVisible={setLoaderVisible}
+            setActualQuoteObj={setActualQuoteObj}
+            setAuthorsArray={setAuthorsArray}
+            startGame={startGame}
           ></FourAuthors>
         </div>
       ) : (
         ""
       )}
-      {authorUserChose !== "" ? <p>You chose {authorUserChose}</p> : ""}
     </div>
   );
 }
@@ -104,4 +100,18 @@ async function getQuoteAndThreeOtherAuthors(setLoaderVisible) {
     randomQuoteObj: randomQuoteObj,
     incorrectAuthors: threeOtherAuthors,
   };
+}
+
+function startGame(setLoaderVisible, setActualQuoteObj, setAuthorsArray) {
+  setLoaderVisible(true);
+  getQuoteAndThreeOtherAuthors(setLoaderVisible).then(
+    (quotesPlusAuthorsObj) => {
+      setActualQuoteObj(quotesPlusAuthorsObj.randomQuoteObj);
+      setAuthorsArray(
+        quotesPlusAuthorsObj.incorrectAuthors.concat(
+          quotesPlusAuthorsObj.randomQuoteObj.author
+        )
+      );
+    }
+  );
 }
