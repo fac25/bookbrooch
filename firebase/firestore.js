@@ -186,16 +186,36 @@ async function favTag(userId) {
 
   // Search by value return key 
   //let result = countKeysUsed.find(item => item.id === max);
-  function getKeyByValue(object, value) {
-    return Object.keys(object).find(key => object[key] === value);
-  }
-  //console.log(getKeyByValue(countKeysUsed, max));
+  // ======================================== TO DO IM HERE ========================================
+  // function getKeyByValue(object, value) {
+  //   let a = 0
+  //   let b = 0
+  //   let same = []
+  //   do {
+
+  //     // Find first key
+  //     a = Object.keys(object).find(key => object[key] === value);
+  //     same.push(a)
+  //     object[a] = 0;
+  //     // Find any key that's the same
+  //     b = Object.keys(object).find(key => object[key] === value);
+  //     object[a] = 0;
+  //     if (a == b) {
+  //       same.push(b)
+  //     }
+  //     else if (a != b) {
+  //       return
+  //     }
+  //   }
+  //   while (a == b)
+
+  // }
+  console.log(getKeyByValue(countKeysUsed, max));
 
 
   return favouriteTag
 }
 favTag("NWkrRsxJHEPucwaCUVsSFUPJOrI3")
-
 
 // =======================BADGES=========================== //
 
