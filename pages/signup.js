@@ -51,7 +51,7 @@ const SignupPage = () => {
                 Sign Up
               </Heading>
             </Box>
-            <form action="" onSubmit={handleSubmit(onSubmit)}>
+            <form id="signupForm" action="" onSubmit={handleSubmit(onSubmit)}>
               <Stack
                 spacing="3"
                 display="flex"
@@ -111,7 +111,7 @@ const SignupPage = () => {
                   {errors.password && <p>{errors.password.message}</p>}
                 </FormControl>
                 <Button type="submit" minW={{ base: "full", md: "48" }}>
-                  submit
+                  Submit
                 </Button>
               </Stack>
             </form>

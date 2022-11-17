@@ -7,10 +7,13 @@ import {
   db,
 } from "../../firebase/firestore";
 import SaveQuoteForm from "../../components/saveQuoteForm";
+import InARowBadge from "../../components/badges/InARowBadge";
 import { onSnapshot, collection } from "firebase/firestore";
 import Quote from "../../components/Quote";
 import FilterQuotesForm from "../../components/FilterQuotesForm";
 import { Container, Heading } from "@chakra-ui/react";
+
+import FavouriteTagBadge from "../../components/badges/FavouriteTagBadge";
 
 //import getUser function from firebase/firestore.js
 export async function getServerSideProps({ params }) {
@@ -49,6 +52,7 @@ export async function getServerSideProps({ params }) {
 }
 
 const DashboardPage = ({ userData }) => {
+  const currentUser = userData.userId;
   // const [quotes, setQuotes] = useState(userData.quotes);
 
   // const onDelete = (quoteId) => {
@@ -107,6 +111,11 @@ const DashboardPage = ({ userData }) => {
         <Heading as="h1" size="lg" mb="25px" textAlign="center">
           {userData.name}
         </Heading>
+        <div>
+          Badges:
+          <InARowBadge userId={currentUser} />
+          <FavouriteTagBadge userId={currentUser} />
+        </div>
         <SaveQuoteForm></SaveQuoteForm>
         <section>
           {/* {console.log(quotes)} */}

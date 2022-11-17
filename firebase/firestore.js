@@ -12,6 +12,7 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { async } from "@firebase/util";
+import { value } from "pos/lexicon.js";
 
 const db = getFirestore(app);
 
@@ -71,7 +72,7 @@ async function addQuote(uidFromAuth, newQuote) {
 
 // DISLPAY ALL QUOTES BY USER =======================
 async function getUserQuotes(user) {
-// get all QUOTES by user ID
+  // get all QUOTES by user ID
   const colRef = collection(db, "users", user, "quotes");
   //get all docs inside the quotes collection of this user
   const userQuoteCol = await getDocs(colRef);
@@ -86,8 +87,7 @@ async function getUserQuotes(user) {
 }
 
 // TEST displayUserQuotes
-// getUserQuotes("Eminem123")
-
+//getUserQuotes("Eminem123")
 
 // Find user's name
 // Query to get a name from a specific user by their id
@@ -139,11 +139,79 @@ await updateDoc(washingtonRef, {
 //   console.log(snap.data());
 // });
 
+// =======================BADGES=========================== //
+
+// _________________________         [1]       _________________________ //
+// ......................... Quote Count Badge ......................... //
+
+async function InARow(userId) {
+  //console.log("Firebase userId: " + userId)
+  const userQuotes = await getUserQuotes(userId)
+  let quoteCount = []
+  quoteCount = Object.keys(userQuotes).length
+  //console.log(quoteCount)
+  return quoteCount
+}
+
+
+// _________________________         [2]       _________________________ //
+// ......................... Favourite Tag Badge ......................... //
+
+async function favTag(userId) {
+  //console.log("Firebase userId: " + userId)
+  let favouriteTag = "none"
+  // Get all quotes
+  const userQuotes = await getUserQuotes(userId)
+  // Return array of all tags used
+  let tags = []
+  userQuotes.forEach(quote => tags.push(quote.tags))
+  tags = tags.flat()
+  console.log(tags)
+  // Output: [ "Happiness", "Happiness", "Funny", "Inspirational", "Funny" ]
+
+  // Create stats object for mostly used tags
+  const countKeysUsed = {};
+  tags.forEach(element => {
+    countKeysUsed[element] = (countKeysUsed[element] || 0) + 1;
+  });
+  console.log(countKeysUsed)
+  // Output: {Wisdom: 3, Inspirational: 2, Life: 1}
+
+  // Find highest number of used
+  let valuesArray = Object.values(countKeysUsed);
+  // console.log(valuesArray)
+  // Output [ 2, 2, 1 ]
+  let maxPointsForTag = Math.max(...valuesArray);
+  console.log(`Max is: ${maxPointsForTag}`);
+  // Output: Max is: 2
+
+  // Search by value return key 
+  function getKeyByValue(object) {
+    let same = {}
+    Object.keys(object).forEach(tag => {
+      let freq = object[tag] // Wisdom, Inspirational, Life
+      if (!same[freq]) same[freq] = [] // 3: []
+      same[freq].push(tag) // 3: [Wisdom, Inspirational]
+    })
+    return same[maxPointsForTag]
+  }
+  const mostPopularQuotes = getKeyByValue(countKeysUsed);
+  //console.log(mostPopularQuotes)
+  return mostPopularQuotes
+}
+// Output [Wisdom, Inspirational]
+
+favTag("NWkrRsxJHEPucwaCUVsSFUPJOrI3")
+
+// =======================BADGES=========================== //
+
 export {
   addNewUserToDB,
   addQuote,
   getUserQuotes,
   getUsername,
   deleteQuote,
+  InARow,
+  favTag,
   db,
 };

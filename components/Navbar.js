@@ -29,7 +29,7 @@ const Navbar = ({ children }) => {
     {
       id: 4,
       name: "Game",
-      link: "/game",
+      link: "/games/game-selection",
     },
   ];
 
@@ -51,7 +51,12 @@ const Navbar = ({ children }) => {
             <Flex justify="space-between" align="center">
               <div>
                 <Link href="/">
-                  <Text fontSize="2xl" fontWeight="bold">
+                  <Text
+                    id={"logo"}
+                    fontSize="2xl"
+                    fontWeight="bold"
+                    cursor={"pointer"}
+                  >
                     Bookbrooch
                   </Text>
                 </Link>
@@ -78,7 +83,7 @@ const Navbar = ({ children }) => {
                           <Link href={`/users/${user.uid}`}>Dashboard</Link>
                         </li>
                         <li>
-                          <Link href={`/game`}>Game</Link>
+                          <Link href={`/games/game-selection`}>Game</Link>
                         </li>
                         <li>
                           <a onClick={handleLogout}>Logout</a>

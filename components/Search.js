@@ -32,7 +32,7 @@ export default function Search() {
 
   return (
     <>
-      <form action="" onSubmit={handleSubmit(onSubmit)}>
+      <form id="searchForm" action="" onSubmit={handleSubmit(onSubmit)}>
         <Box minH="16" py="3">
           <Flex
             justify="center"
@@ -67,7 +67,7 @@ export default function Search() {
             </div>
 
             <div>
-              <Button type="submit">submit</Button>
+              <Button type="submit">Submit</Button>
             </div>
           </Flex>
         </Box>

@@ -9,12 +9,12 @@
 // - [x] message + real quote if wrong
 // - [x] alert("You are now playing!");
 
-import { searchBy2, getSynonym } from "../api-helpers";
+import { searchBy2, getSynonym } from "../../api-helpers";
 import {
   getRndInteger,
   removePunctuationFromString,
   getAdjectivesAdverbs,
-} from "../general-helpers";
+} from "../../general-helpers";
 
 import { Container, Heading, Text, Button, Flex } from "@chakra-ui/react";
 import Head from "next/head";
@@ -22,14 +22,36 @@ import Head from "next/head";
 // useState for current quote
 // onclick listener for btn clicked = user response
 import { useState, useEffect } from "react";
-import Loader from "../components/Loader";
-
-export default function RealOrFake() {
+import Loader from "../../components/Loader";
+export async function getServerSideProps() {
+  let schrodingerQuoteInfo = await getSchrodingerQuote();
+  return {
+    props: {
+      schrodingerQuoteInfo,
+    },
+  };
+}
+export default function RealOrFake({ schrodingerQuoteInfo }) {
   const [gameQuote, setGameQuote] = useState({});
   const [loaderVisible, setLoaderVisible] = useState(true);
 
   useEffect(() => {
-    startGame(setGameQuote, setLoaderVisible);
+    setLoaderVisible(false);
+    // console.log(schrodingerQuoteInfo);
+    // [1] UPDATE QUOTE STATE WITH INITIAL QUOTE
+    getRndInteger(0, 2) === 0
+      ? setGameQuote({
+          quote: schrodingerQuoteInfo.realQuote,
+          answer: true,
+          author: schrodingerQuoteInfo.author,
+          realQuote: schrodingerQuoteInfo.realQuote,
+        })
+      : setGameQuote({
+          quote: schrodingerQuoteInfo.fakeQuote,
+          answer: false,
+          author: schrodingerQuoteInfo.author,
+          realQuote: schrodingerQuoteInfo.realQuote,
+        });
   }, []);
 
   return (
@@ -112,7 +134,8 @@ export default function RealOrFake() {
 
 async function startGame(setGameQuote, setLoaderVisible) {
   try {
-    const schrodingerQuoteInfo = await getSchrodingerQuote(setLoaderVisible); // Schrodinger quote
+    const schrodingerQuoteInfo = await getSchrodingerQuote(); // Schrodinger quote
+    setLoaderVisible(false);
     // console.log(schrodingerQuoteInfo);
     // [1] UPDATE QUOTE STATE WITH INITIAL QUOTE
     getRndInteger(0, 2) === 0
@@ -170,7 +193,7 @@ async function getQuoteAndArrayOfPossibleWordsToChange() {
   return [randomQuoteObj, arrayOfPossibleWordsToChange];
 }
 
-async function getSchrodingerQuote(setLoaderVisible) {
+async function getSchrodingerQuote() {
   let [quoteObj, wordsArr] = [];
   let synonymsObj = {
     synonyms: [],
@@ -195,7 +218,6 @@ async function getSchrodingerQuote(setLoaderVisible) {
     author: quoteObj.author,
     source: quoteObj.publication,
   };
-  setLoaderVisible(false);
   return schrodingerQuoteInfo;
 }
 
@@ -233,7 +255,8 @@ async function checkAnswer(
     }
   }
 
-  const schrodingerQuoteInfo = await getSchrodingerQuote(setLoaderVisible); // Schrodinger quote
+  const schrodingerQuoteInfo = await getSchrodingerQuote(); // Schrodinger quote
+  setLoaderVisible(false);
   getRndInteger(0, 2) === 0
     ? setGameQuote({
         quote: schrodingerQuoteInfo.realQuote,
