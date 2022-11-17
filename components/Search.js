@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { searchBy } from "../api-helpers";
+import { searchBy } from "../lib/api-helpers";
 import Quote from "../components/Quote";
 import { Flex, Box, Button, Select, Input, Heading } from "@chakra-ui/react";
 import { useAuth } from "../context/AuthContext";

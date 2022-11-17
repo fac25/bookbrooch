@@ -7,7 +7,7 @@ import Quote from "../components/Quote";
 import Search from "../components/Search";
 import Loader from "../components/Loader";
 import { useAuth } from "../context/AuthContext";
-import { getQuotesOfTheDay } from "../api-helpers";
+import { getQuotesOfTheDay } from "../lib/api-helpers";
 
 export default function Home() {
   // let dayTagPairs = {
