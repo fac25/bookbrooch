@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import Loader from "../components/Loader.js";
 import { useRouter } from "next/router.js";
 
 const AuthContext = createContext({});
@@ -51,7 +52,7 @@ export const AuthContextProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ user, signUp, logIn, logOut, setUser }}>
-      {loading ? <>Loading</> : children}
+      {loading ? <Loader /> : children}
     </AuthContext.Provider>
   );
 };
