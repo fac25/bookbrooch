@@ -11,7 +11,7 @@ const UnprotectedRoute = ({ children }) => {
       router.push(`/users/${user.uid}`);
     }
     // else {
-    //   console.log(user)
+// console.log(user)
     // }
   }, [router, user /*userFetched*/]);
   return <div>{!user ? children : null}</div>;

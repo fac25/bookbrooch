@@ -24,7 +24,7 @@ async function searchBy(query, value, page = 1) {
 async function searchBy2(query, value, page = 1) {
   const quotesPromise = await fetch(`${apiUrl}/${query}/${value}?page=${page}`);
   const quotesJson = await quotesPromise.json();
-  //console.log(quotesJson);
+  // console.log(quotesJson);
   return quotesJson;
 }
 //Query for additional pages with ?page=#
@@ -47,7 +47,7 @@ async function getSynonym(word) {
     options
   );
   const wordJson = await wordPromise.json();
-  //console.log(wordJson);
+  // console.log(wordJson);
   return wordJson;
 }
 
@@ -55,13 +55,13 @@ async function getQuotesOfTheDay() {
   let day = new Date().getDay();
 
   let dayTagPairs = {
-    0: "happiness",
-    1: "death",
-    2: "life",
-    3: "motivational",
-    4: "funny",
-    5: "love",
-    6: "friends",
+    0: "Happiness",
+    1: "Death",
+    2: "Life",
+    3: "Motivational",
+    4: "Funny",
+    5: "Love",
+    6: "Friends",
   };
 
   let pageNum = getRndInteger(0, 100);

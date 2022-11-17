@@ -25,7 +25,8 @@ export default function SaveQuoteForm() {
   const onSubmit = (data) => {
     // console.log("save button clicked");
     // console.log(data);
-    let dataChanged = { ...data, tags: [data.tags] };
+    // Data tags to be array and not string
+    let dataChanged = { ...data, tags: [data.tags] }
 
     try {
       addQuote(user.uid, dataChanged).then(() => {
@@ -37,7 +38,7 @@ export default function SaveQuoteForm() {
         }));
       });
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
       // alert(error.message);
     }
   };

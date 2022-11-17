@@ -37,7 +37,7 @@ const SignupPage = () => {
         router.push(`/users/${user.uid}`);
       });
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
       // alert(error.message);
     }
   };

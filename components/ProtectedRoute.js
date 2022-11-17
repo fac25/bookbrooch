@@ -7,13 +7,13 @@ const ProtectedRoute = ({ children }) => {
   const { user, /*userFetched*/ } = useAuth();
 
   useEffect(() => {
-    //console.log({ user, /*userFetched*/ })
+    // console.log({ user, /*userFetched*/ })
 
     if (!user?.uid /*&& !userFetched*/) {
       router.push("/login");
     }
     // else {
-    //   console.log(user)
+    // console.log(user)
     // }
   }, [router, user, /*userFetched*/]);
   return <div>{user ? children : null}</div>;

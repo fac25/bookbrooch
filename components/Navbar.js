@@ -39,7 +39,7 @@ const Navbar = ({ children }) => {
       setUser(null);
       router.push("/");
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
     }
   };
 
@@ -64,9 +64,8 @@ const Navbar = ({ children }) => {
 
               <nav>
                 <ul
-                  className={`${styles.nav} ${
-                    isNavActive ? styles.active : ""
-                  }`}
+                  className={`${styles.nav} ${isNavActive ? styles.active : ""
+                    }`}
                 >
                   <>
                     {!user?.uid ? (
@@ -108,9 +107,8 @@ const Navbar = ({ children }) => {
                   aria-label="Toggle menu"
                   ml="5px"
                   p="3"
-                  className={`${styles["nav-btn"]} ${
-                    isNavActive ? styles.active : ""
-                  }`}
+                  className={`${styles["nav-btn"]} ${isNavActive ? styles.active : ""
+                    }`}
                   onClick={() => setIsNavActive(!isNavActive)}
                 >
                   <span aria-hidden></span>
