@@ -1,6 +1,7 @@
 import WrongAuthorGuessed from "./WrongAuthorGuessed";
 import RightAuthorGuessed from "./RightAuthorGuessed";
 import { useState } from "react";
+import { Button, Flex } from "@chakra-ui/react";
 export default function FourAuthors({
   optionA,
   optionB,
@@ -32,18 +33,12 @@ export default function FourAuthors({
 
   return (
     <div>
-      <button type="button" onClick={handleClick}>
-        {optionA}
-      </button>
-      <button type="button" onClick={handleClick}>
-        {optionB}
-      </button>
-      <button type="button" onClick={handleClick}>
-        {optionC}
-      </button>
-      <button type="button" onClick={handleClick}>
-        {optionD}
-      </button>
+      <Flex flexWrap="wrap" gap="5" mt="5">
+        <Button onClick={handleClick}>{optionA}</Button>
+        <Button onClick={handleClick}>{optionB}</Button>
+        <Button onClick={handleClick}>{optionC}</Button>
+        <Button onClick={handleClick}>{optionD}</Button>
+      </Flex>
       {guessTruthiness ? (
         <RightAuthorGuessed
           actualQuoteObj={actualQuoteObj}
