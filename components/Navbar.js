@@ -92,7 +92,7 @@ const Navbar = ({ children }) => {
                           <Link href={`/games/game-selection`}>Game</Link>
                         </li>
                         <li onClick={() => setIsNavActive(false)}>
-                          <a onClick={handleLogout}>Logout</a>
+                          <Button onClick={handleLogout}>Logout</Button>
                         </li>
                       </>
                     )}
