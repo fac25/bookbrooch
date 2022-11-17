@@ -1,9 +1,12 @@
+import { getRndInteger } from "./general-helpers.js";
 // API https://goodquotesapi.herokuapp.com/#/developer
 const apiUrl = "https://goodquotesapi.herokuapp.com";
 
 async function searchBy(query, value, page = 1) {
   let quotesFormatted = [];
-  const quoteByTag = await fetch(`${apiUrl}/${query}/${value}?page=${page}`).then((res) =>
+  const quoteByTag = await fetch(
+    `${apiUrl}/${query}/${value}?page=${page}`
+  ).then((res) =>
     res.json().then((data) => {
       data.quotes.forEach((q) => {
         const authorFormatted = q.author.trim().replace(",", "");
@@ -48,4 +51,46 @@ async function getSynonym(word) {
   return wordJson;
 }
 
-export { searchBy, searchBy2, getSynonym };
+async function getQuotesOfTheDay() {
+  let day = new Date().getDay();
+
+  let dayTagPairs = {
+    0: "happiness",
+    1: "death",
+    2: "life",
+    3: "motivational",
+    4: "funny",
+    5: "love",
+    6: "friends",
+  };
+
+  let pageNum = getRndInteger(0, 100);
+
+  let thingFunctionActuallyReturns;
+  let fetchResult = await fetch(
+    `https://goodquotesapi.herokuapp.com/tag/${dayTagPairs[day]}?page=${pageNum}`
+  )
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      //console.log(data.quotes[0].quote);
+      let slicedQuotes = data.quotes.slice(0, 5);
+      let newRandomQuotes = [];
+      slicedQuotes.forEach((element) => {
+        newRandomQuotes.push({
+          author: element.author.trim().replace(",", ""),
+          source: element.publication || " Publication unknown",
+          quote: element.quote,
+          tags: [dayTagPairs[day]],
+        });
+        //console.log(newRandomQuotes);
+        thingFunctionActuallyReturns = newRandomQuotes;
+        return newRandomQuotes;
+      });
+    });
+
+  return thingFunctionActuallyReturns;
+}
+
+export { searchBy, searchBy2, getSynonym, getQuotesOfTheDay };

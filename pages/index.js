@@ -7,42 +7,25 @@ import Quote from "../components/Quote";
 import Search from "../components/Search";
 import Loader from "../components/Loader";
 import { useAuth } from "../context/AuthContext";
+import { getQuotesOfTheDay } from "../api-helpers";
 
 export default function Home() {
-  let dayTagPairs = {
-    0: "happiness",
-    1: "death",
-    2: "life",
-    3: "motivational",
-    4: "funny",
-    5: "love",
-    6: "friends",
-  };
+  // let dayTagPairs = {
+  //   0: "happiness",
+  //   1: "death",
+  //   2: "life",
+  //   3: "motivational",
+  //   4: "funny",
+  //   5: "love",
+  //   6: "friends",
+  // };
   const [randomQuotes, setRandomQuotes] = useState([]);
   const [loaderVisible, setLoaderVisible] = useState(true);
   useEffect(() => {
-    let day = new Date().getDay();
-    //console.log(day);
-    fetch(`https://goodquotesapi.herokuapp.com/tag/${dayTagPairs[day]}`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        //console.log(data.quotes[0].quote);
-        let slicedQuotes = data.quotes.slice(0, 5);
-        let newRandomQuotes = [];
-        slicedQuotes.forEach((element) => {
-          newRandomQuotes.push({
-            author: element.author.trim().replace(",", ""),
-            source: element.publication || " Publication unknown",
-            quote: element.quote,
-            tags: [dayTagPairs[day]],
-          });
-        });
-
-        setRandomQuotes(newRandomQuotes);
-        setLoaderVisible(false);
-      });
+    getQuotesOfTheDay().then((newRandomQuotes) => {
+      setRandomQuotes(newRandomQuotes);
+      setLoaderVisible(false);
+    });
   }, []);
 
   const { user } = useAuth();
