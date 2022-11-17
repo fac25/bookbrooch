@@ -10,13 +10,13 @@ import { useAuth } from "../context/AuthContext";
 
 export default function Home() {
   let dayTagPairs = {
-    0: "happiness",
-    1: "death",
-    2: "life",
-    3: "motivational",
-    4: "funny",
-    5: "love",
-    6: "friends",
+    0: "Happiness",
+    1: "Death",
+    2: "Life",
+    3: "Motivational",
+    4: "Funny",
+    5: "Love",
+    6: "Friends",
   };
   const [randomQuotes, setRandomQuotes] = useState([]);
   const [loaderVisible, setLoaderVisible] = useState(true);
@@ -67,10 +67,11 @@ export default function Home() {
               </Heading>
               <ul>
                 {randomQuotes.map((quote, index) => {
+                  console.log(quote)
                   return (
                     <Quote
                       key={quote.author + index}
-                      quoteObj={quote}
+                      quoteObj={quote /* Should have tags included */}
                       home={true}
                       user={user}
                     />
