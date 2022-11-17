@@ -47,9 +47,10 @@ const SignupPage = () => {
         <Flex minH="80vh" width="full" align="center" justifyContent="center">
           <Box p={5} width="xl" borderWidth="1px" shadow="md">
             <Box textAlign="center">
-              <Heading mb="20px">SignUp</Heading>
+              <Heading as="h1" mb="20px">
+                Sign Up
+              </Heading>
             </Box>
-
             <form id="signupForm" action="" onSubmit={handleSubmit(onSubmit)}>
               <Stack
                 spacing="3"

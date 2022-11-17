@@ -11,6 +11,8 @@ import InARowBadge from "../../components/badges/InARowBadge";
 import { onSnapshot, collection } from "firebase/firestore";
 import Quote from "../../components/Quote";
 import FilterQuotesForm from "../../components/FilterQuotesForm";
+import { Container, Heading } from "@chakra-ui/react";
+
 import FavouriteTagBadge from "../../components/badges/FavouriteTagBadge";
 
 //import getUser function from firebase/firestore.js
@@ -27,7 +29,7 @@ export async function getServerSideProps({ params }) {
   // });
 
   //get current user's details (their name, quotes etc) from database
-
+  console.log("hi");
   // - [X] query DB to get the user's name, search by params.id
   const userId = params.id;
   // - [X] write a query for the user's name
@@ -50,7 +52,7 @@ export async function getServerSideProps({ params }) {
 }
 
 const DashboardPage = ({ userData }) => {
-  const currentUser = userData.userId
+  const currentUser = userData.userId;
   // const [quotes, setQuotes] = useState(userData.quotes);
 
   // const onDelete = (quoteId) => {
@@ -78,6 +80,7 @@ const DashboardPage = ({ userData }) => {
 
   // console.log("=============================================");
   // console.log(quoteData);
+  console.log(userData);
   useEffect(() => {
     const colRef = collection(db, "users", userData.userId, "quotes");
     //real time update
@@ -97,54 +100,61 @@ const DashboardPage = ({ userData }) => {
   category === "all"
     ? (filteredQuotes = quotes)
     : (filteredQuotes = quotes.filter((q) => {
-      return q.tags.includes(category);
-    }));
+        if (q.tags) {
+          return q.tags.includes(category);
+        }
+      }));
 
   return (
     <ProtectedRoute>
-      <h1>Username: {userData.name}</h1>
-      <div>Badges:
-        <InARowBadge userId={currentUser} />
-        <FavouriteTagBadge userId={currentUser}   />
-      </div>
-      <SaveQuoteForm></SaveQuoteForm>
-      <section>
-        {/* {console.log(quotes)} */}
-        <FilterQuotesForm setCategory={setCategory}></FilterQuotesForm>
-        <ul>
-          {filteredQuotes.map((quoteObj) => {
-            const { author, source, quote, quoteId, tags } = quoteObj;
-            return (
-              <Quote
-                key={quoteId}
-                userData={userData}
-                quoteObj={quoteObj}
-                tagIsButton={true}
-                setCategory={setCategory}
-              />
-              // <li>
-              //   <p>{quote}</p>
-              //   <p>
-              //     <span>{author}</span>-<span>{source}</span>
-              //   </p>
-              //   <p>
-              //     {tags.map((tag) => (
-              //       <button key={tag}>{tag}</button>
-              //     ))}
-              //   </p>
-              //   <button
-              //     onClick={() => {
-              //       console.log(quoteId, userData.userId);
-              //       deleteQuote(userData.userId, quoteId);
-              //     }}
-              //   >
-              //     Delete
-              //   </button>
-              // </li>
-            );
-          })}
-        </ul>
-      </section>
+      <Container maxW="container.lg">
+        <Heading as="h1" size="lg" mb="25px" textAlign="center">
+          {userData.name}
+        </Heading>
+        <div>
+          Badges:
+          <InARowBadge userId={currentUser} />
+          <FavouriteTagBadge userId={currentUser} />
+        </div>
+        <SaveQuoteForm></SaveQuoteForm>
+        <section>
+          {/* {console.log(quotes)} */}
+          <FilterQuotesForm setCategory={setCategory}></FilterQuotesForm>
+          <ul>
+            {filteredQuotes.map((quoteObj) => {
+              const { author, source, quote, quoteId, tags } = quoteObj;
+              return (
+                <Quote
+                  key={quoteId}
+                  userData={userData}
+                  quoteObj={quoteObj}
+                  tagIsButton={true}
+                  setCategory={setCategory}
+                />
+                // <li>
+                //   <p>{quote}</p>
+                //   <p>
+                //     <span>{author}</span>-<span>{source}</span>
+                //   </p>
+                //   <p>
+                //     {tags.map((tag) => (
+                //       <button key={tag}>{tag}</button>
+                //     ))}
+                //   </p>
+                //   <button
+                //     onClick={() => {
+                //       console.log(quoteId, userData.userId);
+                //       deleteQuote(userData.userId, quoteId);
+                //     }}
+                //   >
+                //     Delete
+                //   </button>
+                // </li>
+              );
+            })}
+          </ul>
+        </section>
+      </Container>
     </ProtectedRoute>
   );
 };

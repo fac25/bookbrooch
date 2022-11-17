@@ -27,12 +27,11 @@ export const AuthContextProvider = ({ children }) => {
         });
         // setUserFetched(true);
       }
-      setLoading(false)
+      setLoading(false);
       // else {
       //   setUser({ email: null, uid: null });
       // }
     });
-
 
     return () => checkUserState();
   }, []);
@@ -51,8 +50,8 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, signUp, logIn, logOut, /*userFetched*/ }}>
-      {loading ? (<>Loading</>) : children}
+    <AuthContext.Provider value={{ user, signUp, logIn, logOut, setUser }}>
+      {loading ? <>Loading</> : children}
     </AuthContext.Provider>
   );
 };

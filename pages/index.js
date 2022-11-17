@@ -1,11 +1,12 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import { Container } from "@chakra-ui/react";
+import { Container, Heading, Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import Quote from "../components/Quote";
 import Search from "../components/Search";
 import Loader from "../components/Loader";
+import { useAuth } from "../context/AuthContext";
 
 export default function Home() {
   let dayTagPairs = {
@@ -43,22 +44,44 @@ export default function Home() {
         setLoaderVisible(false);
       });
   }, []);
+
+  const { user } = useAuth();
+
   return (
     <div>
       <Container maxW="container.lg" py="15px">
-        <Search />
-        {loaderVisible ? <Loader></Loader> : ""}
-        {loaderVisible === false ? (
-          <div>
-            <ul>
-              {randomQuotes.map((quote, index) => {
-                return <Quote key={quote.author + index} quoteObj={quote} />;
-              })}
-            </ul>
-          </div>
-        ) : (
-          ""
-        )}
+        <Heading as="h1" size="lg" textAlign="center">
+          Quotes to feed your curiousity
+        </Heading>
+        <section>
+          <Heading as="h2" size="md" textAlign="center">
+            Search for a quote
+          </Heading>
+          <Search />
+
+          {loaderVisible ? <Loader></Loader> : ""}
+          {loaderVisible === false ? (
+            <section>
+              <Heading as="h2" size="md" textAlign="center" my="15px">
+                Quotes of the day
+              </Heading>
+              <ul>
+                {randomQuotes.map((quote, index) => {
+                  return (
+                    <Quote
+                      key={quote.author + index}
+                      quoteObj={quote}
+                      home={true}
+                      user={user}
+                    />
+                  );
+                })}
+              </ul>
+            </section>
+          ) : (
+            ""
+          )}
+        </section>
       </Container>
     </div>
   );

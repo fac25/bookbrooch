@@ -56,12 +56,24 @@ export default function RealOrFake({ schrodingerQuoteInfo }) {
 
   return (
     <Container maxW="container.lg">
-      <Heading>Real or Fake</Heading>
+      <Heading as="h1" textAlign="center" mb="5">
+        Real or Fake
+      </Heading>
       <section id="start-game">
-        <Text fontSize={["1em", "1.5em"]} textAlign={["left", "center"]}>
+        <Heading
+          as="h2"
+          fontSize={["1em", "1.5em"]}
+          textAlign={["left", "center"]}
+          mb="3"
+        >
           Is the displayed quote real?
-        </Text>
-        <Text fontSize={["1em", "1.5em"]} textAlign={["left", "center"]} mb={9}>
+        </Heading>
+        <Text
+          as="p"
+          fontSize={["1em", "1.5em"]}
+          textAlign={["left", "center"]}
+          mb={9}
+        >
           Test your knowledge with spotting if a quote is real or not
         </Text>
       </section>
