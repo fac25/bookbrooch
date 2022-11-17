@@ -26,7 +26,7 @@ export async function getServerSideProps({ params }) {
   // });
 
   //get current user's details (their name, quotes etc) from database
-
+  console.log("hi");
   // - [X] query DB to get the user's name, search by params.id
   const userId = params.id;
   // - [X] write a query for the user's name
@@ -76,6 +76,7 @@ const DashboardPage = ({ userData }) => {
 
   // console.log("=============================================");
   // console.log(quoteData);
+  console.log(userData);
   useEffect(() => {
     const colRef = collection(db, "users", userData.userId, "quotes");
     //real time update
@@ -95,7 +96,9 @@ const DashboardPage = ({ userData }) => {
   category === "all"
     ? (filteredQuotes = quotes)
     : (filteredQuotes = quotes.filter((q) => {
-        return q.tags.includes(category);
+        if (q.tags) {
+          return q.tags.includes(category);
+        }
       }));
 
   return (

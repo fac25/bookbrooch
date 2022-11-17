@@ -19,11 +19,13 @@ export default function Quote({
       borderWidth="1px"
       display="flex"
       flexDirection="column"
-      gap="5"
+      gap="3"
       boxShadow="md"
       className="quote"
     >
-      <Text as="p">{quote}</Text>
+      <Text as="p" maxH="200px" overflowY="auto">
+        {quote}
+      </Text>
       <p>
         <Heading fontSize="md" as="span">
           {author}
@@ -63,6 +65,7 @@ export default function Quote({
       )}
       {user && home && (
         <Button
+          minH="30px"
           onClick={() => {
             addQuote(user.uid, quoteObj);
           }}

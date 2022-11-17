@@ -20,19 +20,19 @@ li {
 }
 
 .quote:nth-child(even) {
-  transform: skewX(-10deg);
+  transform: skewX(-5deg);
 }
 
 .quote:nth-child(even) > * {
-  transform: skewX(10deg);
+  transform: skewX(5deg);
 }
 
 .quote:nth-child(odd) {
-  transform: skewX(10deg);
+  transform: skewX(5deg);
 }
 
 .quote:nth-child(odd) > * {
-  transform: skewX(-10deg);
+  transform: skewX(-5deg);
 }
 
 @media (prefers-color-scheme: dark) {
