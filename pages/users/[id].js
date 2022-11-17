@@ -6,7 +6,7 @@ import {
   deleteQuote,
   db,
 } from "../../firebase/firestore";
-import SaveQuoteForm from "../../components/saveQuoteForm";
+import SaveQuoteForm from "../../components/SaveQuoteForm";
 import InARowBadge from "../../components/badges/InARowBadge";
 import { onSnapshot, collection } from "firebase/firestore";
 import Quote from "../../components/Quote";

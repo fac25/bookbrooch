@@ -1,4 +1,5 @@
 import { deleteQuote, addQuote } from "../firebase/firestore";
+import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { VStack, Box, Heading, Text, Button, Select, FormLabel } from "@chakra-ui/react";
 export default function Quote({
@@ -10,6 +11,12 @@ export default function Quote({
   home = false,
   user = null,
 }) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
   const { quoteId, quote, author, source, tags = ["Happiness"] } = quoteObj;
   return (
     <Box
@@ -38,16 +45,19 @@ export default function Quote({
       </p>
       {tags.length > 0 && (
         <p>
-          <span>Tags: </span>
-          {searchResults ? "Yes" : "No!"}
-          {/* SELECT FROM TAGS HERE */}
+          <span>Tag: </span>
           {tags.map((tag) =>
             tagIsButton ? (
-
               <div>
-                {/*
-                TO DOOOOOOOOOOOOOOOOOOOOOOO
-                <FormLabel htmlFor="tagToChoseFrom">Tag</FormLabel>
+                < Button
+                  onClick={(e) => setCategory(e.target.innerText)}
+                  key={tag}
+                >
+                  {tag}
+                </Button>
+              </div>
+            ) : (
+              <span>
                 <Select
                   id="tagToChoseFrom"
                   name="tagToChoseFrom"
@@ -61,17 +71,7 @@ export default function Quote({
                   <option value="Funny">Funny</option>
                   <option value="Career/professional">Career/professional</option>
                 </Select>
-                */}
-                < Button
-                  onClick={(e) => setCategory(e.target.innerText)}
-                  key={tag}
-                >
-                  {tag}
-                </Button>
-
-              </div>
-            ) : (
-              <Button as="span">{tag}</Button>
+              </span>
             )
           )}
         </p>

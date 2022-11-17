@@ -70,6 +70,7 @@ export default function Home() {
                   //console.log(quote)
                   return (
                     <Quote
+                      searchResults
                       key={quote.author + index}
                       quoteObj={quote /* Should have tags included */}
                       home={true}
