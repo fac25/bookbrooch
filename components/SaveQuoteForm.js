@@ -25,9 +25,10 @@ export default function SaveQuoteForm() {
   const onSubmit = (data) => {
     // console.log("save button clicked");
     // console.log(data);
+    let dataChanged = { ...data, tags: [data.tags] };
 
     try {
-      addQuote(user.uid, data).then(() => {
+      addQuote(user.uid, dataChanged).then(() => {
         reset(() => ({
           quote: "",
           source: "",
