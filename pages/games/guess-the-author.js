@@ -3,11 +3,11 @@
 // - [x] Let user click to choose between options
 // - [x] Tell them if they were right or wrong
 // - [x] Generate a new random quote
-import { searchBy2 } from "../../api-helpers";
+import { searchBy2 } from "../../lib/api-helpers";
 import {
   getRndInteger,
   getFourUniqueRandomIntegers,
-} from "../../general-helpers";
+} from "../../lib/general-helpers";
 import { useState, useEffect } from "react";
 import Loader from "../../components/Loader";
 import FourAuthors from "../../components/FourAuthors";
