@@ -67,7 +67,7 @@ export default function Home() {
               </Heading>
               <ul>
                 {randomQuotes.map((quote, index) => {
-                  console.log(quote)
+                  //console.log(quote)
                   return (
                     <Quote
                       key={quote.author + index}

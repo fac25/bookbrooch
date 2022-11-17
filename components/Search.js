@@ -82,6 +82,7 @@ export default function Search() {
               quote.tags = ["Inspirational"]
               return (
                 <Quote
+                  searchResults={true}
                   key={quote.author + index}
                   quoteObj={quote}
                   home={true}
