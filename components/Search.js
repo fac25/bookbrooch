@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { searchBy } from "../api-helpers";
 import Quote from "../components/Quote";
-import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Flex, Box, Button, Select, Input, Heading } from "@chakra-ui/react";
 import { useAuth } from "../context/AuthContext";
 
@@ -26,7 +25,7 @@ export default function Search() {
       // console.log(quotes);
     } catch (error) {
       // console.log(error.message);
-      alert(error.message);
+      // alert(error.message);
     }
   };
 
@@ -67,7 +66,7 @@ export default function Search() {
             </div>
 
             <div>
-              <Button type="submit">Submit</Button>
+              <Button type="submit">Search</Button>
             </div>
           </Flex>
         </Box>

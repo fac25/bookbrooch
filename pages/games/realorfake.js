@@ -153,7 +153,7 @@ async function startGame(setGameQuote, setLoaderVisible) {
       });
   } catch (error) {
     // console.log(error.message);
-    alert(error.message);
+    // alert(error.message);
   }
 }
 
