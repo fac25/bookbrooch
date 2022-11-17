@@ -55,13 +55,13 @@ async function getQuotesOfTheDay() {
   let day = new Date().getDay();
 
   let dayTagPairs = {
-    0: "happiness",
-    1: "death",
-    2: "life",
-    3: "motivational",
-    4: "funny",
-    5: "love",
-    6: "friends",
+    0: "Happiness",
+    1: "Death",
+    2: "Life",
+    3: "Motivational",
+    4: "Funny",
+    5: "Love",
+    6: "Friends",
   };
 
   let pageNum = getRndInteger(0, 100);
