@@ -9,12 +9,12 @@
 // - [x] message + real quote if wrong
 // - [x] alert("You are now playing!");
 
-import { searchBy2, getSynonym } from "../../api-helpers";
+import { searchBy2, getSynonym } from "../../lib/api-helpers"
 import {
   getRndInteger,
   removePunctuationFromString,
   getAdjectivesAdverbs,
-} from "../../general-helpers";
+} from "../../lib/general-helpers";
 
 import { Container, Heading, Text, Button, Flex } from "@chakra-ui/react";
 import Head from "next/head";
