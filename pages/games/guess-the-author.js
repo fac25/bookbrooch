@@ -11,6 +11,7 @@ import {
 import { useState, useEffect } from "react";
 import Loader from "../../components/Loader";
 import FourAuthors from "../../components/FourAuthors";
+import { Container, Heading, Text } from "@chakra-ui/react";
 export async function getServerSideProps() {
   let quotesPlusAuthorsObj = await getQuoteAndThreeOtherAuthors();
   return {
@@ -38,13 +39,22 @@ export default function GuessTheAuthor({ quotesPlusAuthorsObj }) {
     );
   }, []);
   return (
-    <div>
-      <p>Do you know your quotes? Test your knowledge!</p>
-      <p>Who said this:</p>
+    <Container maxW="container.lg">
+      <Heading as="h1" size="lg" mb="5" textAlign="center">
+        Guess the author
+      </Heading>
+      <Text size="md" mb="3">
+        Do you know your quotes? Test your knowledge!
+      </Text>
+      <Text mb="3">Who said this:</Text>
       {loaderVisible ? <Loader></Loader> : ""}
       {loaderVisible === false ? (
         <div>
-          <p>{actualQuoteObj.quote}</p>
+          <Text
+            fontStyle="italic"
+            borderWidth="1px"
+            p="3"
+          >{`"${actualQuoteObj.quote}"`}</Text>
           <FourAuthors
             optionA={authorsArray[fourUniqueRandomIntegers[0]]}
             optionB={authorsArray[fourUniqueRandomIntegers[1]]}
@@ -62,7 +72,7 @@ export default function GuessTheAuthor({ quotesPlusAuthorsObj }) {
       ) : (
         ""
       )}
-    </div>
+    </Container>
   );
 }
 
