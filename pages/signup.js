@@ -43,80 +43,80 @@ const SignupPage = () => {
     }
   };
   return (
-<UnprotectedRoute>
-    <Container>
-      <Flex minH="80vh" width="full" align="center" justifyContent="center">
-        <Box p={5} width="xl" borderWidth="1px" shadow="md">
-          <Box textAlign="center">
-            <Heading mb="20px">SignUp</Heading>
+    <UnprotectedRoute>
+      <Container>
+        <Flex minH="80vh" width="full" align="center" justifyContent="center">
+          <Box p={5} width="xl" borderWidth="1px" shadow="md">
+            <Box textAlign="center">
+              <Heading mb="20px">SignUp</Heading>
+            </Box>
+            <form action="" onSubmit={handleSubmit(onSubmit)}>
+              <Stack
+                spacing="3"
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+              >
+                <FormControl
+                  display="flex"
+                  flexDirection={{ base: "column", md: "row" }}
+                  alignItems="center"
+                >
+                  <FormLabel minW="20" textAlign="center">
+                    <label htmlFor="name">Name</label>
+                  </FormLabel>
+                  <Input
+                    type="text"
+                    id="name"
+                    size="lg"
+                    {...register("name", { required: "Name is required" })}
+                  />
+                  {errors.name && <p>{errors.name.message}</p>}
+                </FormControl>
+
+                <FormControl
+                  display="flex"
+                  alignItems="center"
+                  flexDirection={{ base: "column", md: "row" }}
+                >
+                  <FormLabel minW="20" textAlign="center">
+                    <label htmlFor="email">Email</label>
+                  </FormLabel>
+                  <Input
+                    type="email"
+                    id="email"
+                    size="lg"
+                    {...register("email", { required: "Email is required" })}
+                  />
+                  {errors.email && <p>{errors.email.message}</p>}
+                </FormControl>
+                <FormControl
+                  display="flex"
+                  alignItems="center"
+                  flexDirection={{ base: "column", md: "row" }}
+                >
+                  <FormLabel minW="20" textAlign="center">
+                    <label htmlFor="password">Password</label>
+                  </FormLabel>
+
+                  <Input
+                    type="password"
+                    id="password"
+                    size="lg"
+                    {...register("password", {
+                      required: "Password is required",
+                    })}
+                  />
+                  {errors.password && <p>{errors.password.message}</p>}
+                </FormControl>
+                <Button type="submit" minW={{ base: "full", md: "48" }}>
+                  submit
+                </Button>
+              </Stack>
+            </form>
           </Box>
-          <form action="" onSubmit={handleSubmit(onSubmit)}>
-            <Stack
-              spacing="3"
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-            >
-              <FormControl
-                display="flex"
-                flexDirection={{ base: "column", md: "row" }}
-                alignItems="center"
-              >
-                <FormLabel minW="20" textAlign="center">
-                  <label htmlFor="name">Name</label>
-                </FormLabel>
-                <Input
-                  type="text"
-                  id="name"
-                  size="lg"
-                  {...register("name", { required: "Name is required" })}
-                />
-                {errors.name && <p>{errors.name.message}</p>}
-              </FormControl>
-
-              <FormControl
-                display="flex"
-                alignItems="center"
-                flexDirection={{ base: "column", md: "row" }}
-              >
-                <FormLabel minW="20" textAlign="center">
-                  <label htmlFor="email">Email</label>
-                </FormLabel>
-                <Input
-                  type="email"
-                  id="email"
-                  size="lg"
-                  {...register("email", { required: "Email is required" })}
-                />
-                {errors.email && <p>{errors.email.message}</p>}
-              </FormControl>
-              <FormControl
-                display="flex"
-                alignItems="center"
-                flexDirection={{ base: "column", md: "row" }}
-              >
-                <FormLabel minW="20" textAlign="center">
-                  <label htmlFor="password">Password</label>
-                </FormLabel>
-
-                <Input
-                  type="password"
-                  id="password"
-                  size="lg"
-                  {...register("password", {
-                    required: "Password is required",
-                  })}
-                />
-                {errors.password && <p>{errors.password.message}</p>}
-              </FormControl>
-              <Button type="submit" minW={{ base: "full", md: "48" }}>
-                submit
-              </Button>
-            </Stack>
-          </form>
-        </Box>
-      </Flex>
-    </Container>
+        </Flex>
+      </Container>
     </UnprotectedRoute>
   );
 };
