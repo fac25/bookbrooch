@@ -1,14 +1,26 @@
-// - [ ] Grab a single random quote
-// - [ ] Grab 3 other random authors
-// - [ ] Let user click to choose between options
-// - [ ] Tell them if they were right or wrong
-// - [ ] Generate a new random quote
-import { searchBy2 } from "../api-helpers";
-import { getRndInteger, getFourUniqueRandomIntegers } from "../general-helpers";
+// - [x] Grab a single random quote
+// - [x] Grab 3 other random authors
+// - [x] Let user click to choose between options
+// - [x] Tell them if they were right or wrong
+// - [x] Generate a new random quote
+import { searchBy2 } from "../../api-helpers";
+import {
+  getRndInteger,
+  getFourUniqueRandomIntegers,
+} from "../../general-helpers";
 import { useState, useEffect } from "react";
-import Loader from "../components/Loader";
-import FourAuthors from "../components/FourAuthors";
-export default function GuessTheAuthor() {
+import Loader from "../../components/Loader";
+import FourAuthors from "../../components/FourAuthors";
+export async function getServerSideProps() {
+  let quotesPlusAuthorsObj = await getQuoteAndThreeOtherAuthors();
+  return {
+    props: {
+      quotesPlusAuthorsObj,
+    },
+  };
+}
+
+export default function GuessTheAuthor({ quotesPlusAuthorsObj }) {
   const [actualQuoteObj, setActualQuoteObj] = useState({});
   const [authorsArray, setAuthorsArray] = useState([]);
   const [loaderVisible, setLoaderVisible] = useState(true);
@@ -17,7 +29,13 @@ export default function GuessTheAuthor() {
     getFourUniqueRandomIntegers(0, 4)
   );
   useEffect(() => {
-    startGame(setLoaderVisible, setActualQuoteObj, setAuthorsArray);
+    setLoaderVisible(false);
+    setActualQuoteObj(quotesPlusAuthorsObj.randomQuoteObj);
+    setAuthorsArray(
+      quotesPlusAuthorsObj.incorrectAuthors.concat(
+        quotesPlusAuthorsObj.randomQuoteObj.author
+      )
+    );
   }, []);
   return (
     <div>
@@ -48,7 +66,7 @@ export default function GuessTheAuthor() {
   );
 }
 
-async function getQuoteAndThreeOtherAuthors(setLoaderVisible) {
+async function getQuoteAndThreeOtherAuthors() {
   const arrayOfTagsToSearchBy = [
     "life",
     "death",
@@ -70,7 +88,6 @@ async function getQuoteAndThreeOtherAuthors(setLoaderVisible) {
   //get all quotes from that random page
   const quotesByPage = await searchBy2("tag", randomTag, pageNum);
   console.log(quotesByPage);
-  setLoaderVisible(false);
   // get a single random quote from random page
   const randomQuoteObj = quotesByPage.quotes[getRndInteger(0, 30)];
   console.log(randomQuoteObj);
@@ -102,16 +119,14 @@ async function getQuoteAndThreeOtherAuthors(setLoaderVisible) {
   };
 }
 
-function startGame(setLoaderVisible, setActualQuoteObj, setAuthorsArray) {
+async function startGame(setLoaderVisible, setActualQuoteObj, setAuthorsArray) {
   setLoaderVisible(true);
-  getQuoteAndThreeOtherAuthors(setLoaderVisible).then(
-    (quotesPlusAuthorsObj) => {
-      setActualQuoteObj(quotesPlusAuthorsObj.randomQuoteObj);
-      setAuthorsArray(
-        quotesPlusAuthorsObj.incorrectAuthors.concat(
-          quotesPlusAuthorsObj.randomQuoteObj.author
-        )
-      );
-    }
+  let quotesPlusAuthorsObj = await getQuoteAndThreeOtherAuthors();
+  setLoaderVisible(false);
+  setActualQuoteObj(quotesPlusAuthorsObj.randomQuoteObj);
+  setAuthorsArray(
+    quotesPlusAuthorsObj.incorrectAuthors.concat(
+      quotesPlusAuthorsObj.randomQuoteObj.author
+    )
   );
 }

@@ -17,7 +17,7 @@ export default function FourAuthors({
   const [guessTruthiness, setGuessTruthiness] = useState();
   function handleClick(event) {
     setAuthorUserChose(event.target.innerText);
-    if (event.target.innerText === actualQuoteObj.author) {
+    if (event.target.innerText.trim() == actualQuoteObj.author.trim()) {
       setGuessTruthiness(true);
     } else {
       setGuessTruthiness(false);
