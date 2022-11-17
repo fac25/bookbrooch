@@ -25,7 +25,7 @@ export default function Search() {
       //   console.log(quotes);
     } catch (error) {
       console.log(error.message);
-      alert(error.message);
+      // alert(error.message);
     }
   };
 

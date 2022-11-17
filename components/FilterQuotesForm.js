@@ -17,8 +17,8 @@ export default function FilterQuotesForm({ setCategory }) {
     try {
       setCategory(data.tagsToFilterBy);
     } catch (error) {
-      //console.log(error.message);
-      alert(error.message);
+      console.log(error.message);
+      // alert(error.message);
     }
   };
 
