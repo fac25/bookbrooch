@@ -19,11 +19,10 @@ function InARowBadge({ userId }) {
         });
 
     }, []);
-
     // USE EFFECT ====================================
 
     const quoteNumber = () => {
-        const quotecount = InARow(userId).then(amount => setBadgeCount(amount))
+        InARow(userId).then(amount => setBadgeCount(amount))
     }
 
     return (

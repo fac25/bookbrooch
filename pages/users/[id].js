@@ -11,6 +11,7 @@ import InARowBadge from "../../components/badges/InARowBadge";
 import { onSnapshot, collection } from "firebase/firestore";
 import Quote from "../../components/Quote";
 import FilterQuotesForm from "../../components/FilterQuotesForm";
+import FavouriteTagBadge from "../../components/badges/FavouriteTagBadge";
 
 //import getUser function from firebase/firestore.js
 export async function getServerSideProps({ params }) {
@@ -104,6 +105,7 @@ const DashboardPage = ({ userData }) => {
       <h1>Username: {userData.name}</h1>
       <div>Badges:
         <InARowBadge userId={currentUser} />
+        <FavouriteTagBadge userId={currentUser}   />
       </div>
       <SaveQuoteForm></SaveQuoteForm>
       <section>

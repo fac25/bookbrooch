@@ -49,6 +49,7 @@ const SignupPage = () => {
             <Box textAlign="center">
               <Heading mb="20px">SignUp</Heading>
             </Box>
+
             <form id="signupForm" action="" onSubmit={handleSubmit(onSubmit)}>
               <Stack
                 spacing="3"
