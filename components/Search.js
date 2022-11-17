@@ -78,7 +78,6 @@ export default function Search() {
           </Heading>
           <ul>
             {searchResults.map((quote, index) => {
-              quote.tags = ["Inspirational"]
               return (
                 <Quote
                   searchResults={true}
