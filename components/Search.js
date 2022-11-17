@@ -23,9 +23,9 @@ export default function Search() {
     try {
       const quotes = await searchBy(data.tagsToSearchBy, data.search);
       setSearchResults(quotes);
-      //   console.log(quotes);
+// console.log(quotes);
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
       alert(error.message);
     }
   };

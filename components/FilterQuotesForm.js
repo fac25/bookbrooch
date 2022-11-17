@@ -13,11 +13,11 @@ export default function FilterQuotesForm({ setCategory }) {
 
   const onSubmit = (data) => {
     // console.log("save button clicked");
-    //console.log(data);
+    // console.log(data);
     try {
       setCategory(data.tagsToFilterBy);
     } catch (error) {
-      //console.log(error.message);
+      // console.log(error.message);
       alert(error.message);
     }
   };

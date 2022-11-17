@@ -41,17 +41,17 @@ export default function RealOrFake({ schrodingerQuoteInfo }) {
     // [1] UPDATE QUOTE STATE WITH INITIAL QUOTE
     getRndInteger(0, 2) === 0
       ? setGameQuote({
-          quote: schrodingerQuoteInfo.realQuote,
-          answer: true,
-          author: schrodingerQuoteInfo.author,
-          realQuote: schrodingerQuoteInfo.realQuote,
-        })
+        quote: schrodingerQuoteInfo.realQuote,
+        answer: true,
+        author: schrodingerQuoteInfo.author,
+        realQuote: schrodingerQuoteInfo.realQuote,
+      })
       : setGameQuote({
-          quote: schrodingerQuoteInfo.fakeQuote,
-          answer: false,
-          author: schrodingerQuoteInfo.author,
-          realQuote: schrodingerQuoteInfo.realQuote,
-        });
+        quote: schrodingerQuoteInfo.fakeQuote,
+        answer: false,
+        author: schrodingerQuoteInfo.author,
+        realQuote: schrodingerQuoteInfo.realQuote,
+      });
   }, []);
 
   return (
@@ -140,19 +140,19 @@ async function startGame(setGameQuote, setLoaderVisible) {
     // [1] UPDATE QUOTE STATE WITH INITIAL QUOTE
     getRndInteger(0, 2) === 0
       ? setGameQuote({
-          quote: schrodingerQuoteInfo.realQuote,
-          answer: true,
-          author: schrodingerQuoteInfo.author,
-          realQuote: schrodingerQuoteInfo.realQuote,
-        })
+        quote: schrodingerQuoteInfo.realQuote,
+        answer: true,
+        author: schrodingerQuoteInfo.author,
+        realQuote: schrodingerQuoteInfo.realQuote,
+      })
       : setGameQuote({
-          quote: schrodingerQuoteInfo.fakeQuote,
-          answer: false,
-          author: schrodingerQuoteInfo.author,
-          realQuote: schrodingerQuoteInfo.realQuote,
-        });
+        quote: schrodingerQuoteInfo.fakeQuote,
+        answer: false,
+        author: schrodingerQuoteInfo.author,
+        realQuote: schrodingerQuoteInfo.realQuote,
+      });
   } catch (error) {
-    console.log(error.message);
+    // console.log(error.message);
     alert(error.message);
   }
 }
@@ -173,15 +173,15 @@ async function getQuoteAndArrayOfPossibleWordsToChange() {
     arrayOfTagsToSearchBy[getRndInteger(0, arrayOfTagsToSearchBy.length)];
   //make fetch request just to find out how many pages there are
   const quotesResult = await searchBy2("tag", randomTag);
-  //console.log(quotesResult);
+  // console.log(quotesResult);
   //get a random page number
   const pageNum = getRndInteger(1, quotesResult.total_pages);
   //get all quotes from that random page
   const quotesByPage = await searchBy2("tag", randomTag, pageNum);
-  //console.log(quotesByPage);
+  // console.log(quotesByPage);
   // get a single random quote from random page
   const randomQuoteObj = quotesByPage.quotes[getRndInteger(0, 30)];
-  //console.log(randomQuoteObj);
+  // console.log(randomQuoteObj);
   const randomQuoteMinusPunctuation = removePunctuationFromString(
     randomQuoteObj.quote
   );
@@ -189,7 +189,7 @@ async function getQuoteAndArrayOfPossibleWordsToChange() {
   const arrayOfPossibleWordsToChange = getAdjectivesAdverbs(
     randomQuoteMinusPunctuation
   );
-  //console.log(arrayOfPossibleWordsToChange);
+  // console.log(arrayOfPossibleWordsToChange);
   return [randomQuoteObj, arrayOfPossibleWordsToChange];
 }
 
@@ -210,7 +210,7 @@ async function getSchrodingerQuote() {
 
   //next: substitute one of the synonyms into the quote to create a fake one
   let fakeQuote = quoteObj.quote.replace(wordToReplace, fakeWord);
-  //console.log(["Real quote:" + quoteObj.quote, "Fake quote:" + fakeQuote]);
+  // console.log(["Real quote:" + quoteObj.quote, "Fake quote:" + fakeQuote]);
 
   const schrodingerQuoteInfo = {
     fakeQuote,
@@ -259,17 +259,17 @@ async function checkAnswer(
   setLoaderVisible(false);
   getRndInteger(0, 2) === 0
     ? setGameQuote({
-        quote: schrodingerQuoteInfo.realQuote,
-        author: schrodingerQuoteInfo.author,
-        answer: true,
-        realQuote: schrodingerQuoteInfo.realQuote,
-      })
+      quote: schrodingerQuoteInfo.realQuote,
+      author: schrodingerQuoteInfo.author,
+      answer: true,
+      realQuote: schrodingerQuoteInfo.realQuote,
+    })
     : setGameQuote({
-        quote: schrodingerQuoteInfo.fakeQuote,
-        answer: false,
-        author: schrodingerQuoteInfo.author,
-        realQuote: schrodingerQuoteInfo.realQuote,
-      });
+      quote: schrodingerQuoteInfo.fakeQuote,
+      answer: false,
+      author: schrodingerQuoteInfo.author,
+      realQuote: schrodingerQuoteInfo.realQuote,
+    });
 
   // [2] UPDATE STATE GENERATE NEW QUOTE
 

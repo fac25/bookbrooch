@@ -45,7 +45,7 @@ async function addNewUserToDB(uidFromAuth, dataName) {
 //   const usersCol = collection(db, "users")
 //   const snapShot2 = await getDocs(usersCol);
 //   snapShot2.forEach((snap) => {
-//     console.log(snap.data());
+// console.log(snap.data());
 //   });
 // }
 // test();
@@ -136,7 +136,7 @@ await updateDoc(washingtonRef, {
 // // await deleteDoc(doc(db, "quotes", "1", quoteid));
 
 // snapShot1.forEach((snap) => {
-//   console.log(snap.data());
+// console.log(snap.data());
 // });
 
 // =======================BADGES=========================== //
@@ -145,11 +145,11 @@ await updateDoc(washingtonRef, {
 // ......................... Quote Count Badge ......................... //
 
 async function InARow(userId) {
-  //console.log("Firebase userId: " + userId)
+  // console.log("Firebase userId: " + userId)
   const userQuotes = await getUserQuotes(userId)
   let quoteCount = []
   quoteCount = Object.keys(userQuotes).length
-  //console.log(quoteCount)
+  // console.log(quoteCount)
   return quoteCount
 }
 
@@ -158,7 +158,7 @@ async function InARow(userId) {
 // ......................... Favourite Tag Badge ......................... //
 
 async function favTag(userId) {
-  //console.log("Firebase userId: " + userId)
+  // console.log("Firebase userId: " + userId)
   let favouriteTag = "none"
   // Get all quotes
   const userQuotes = await getUserQuotes(userId)
@@ -166,7 +166,7 @@ async function favTag(userId) {
   let tags = []
   userQuotes.forEach(quote => tags.push(quote.tags))
   tags = tags.flat()
-  console.log(tags)
+  // console.log(tags)
   // Output: [ "Happiness", "Happiness", "Funny", "Inspirational", "Funny" ]
 
   // Create stats object for mostly used tags
@@ -174,7 +174,7 @@ async function favTag(userId) {
   tags.forEach(element => {
     countKeysUsed[element] = (countKeysUsed[element] || 0) + 1;
   });
-  console.log(countKeysUsed)
+  // console.log(countKeysUsed)
   // Output: {Wisdom: 3, Inspirational: 2, Life: 1}
 
   // Find highest number of used
@@ -182,7 +182,7 @@ async function favTag(userId) {
   // console.log(valuesArray)
   // Output [ 2, 2, 1 ]
   let maxPointsForTag = Math.max(...valuesArray);
-  console.log(`Max is: ${maxPointsForTag}`);
+  // console.log(`Max is: ${maxPointsForTag}`);
   // Output: Max is: 2
 
   // Search by value return key 
@@ -196,7 +196,7 @@ async function favTag(userId) {
     return same[maxPointsForTag]
   }
   const mostPopularQuotes = getKeyByValue(countKeysUsed);
-  //console.log(mostPopularQuotes)
+  // console.log(mostPopularQuotes)
   return mostPopularQuotes
 }
 // Output [Wisdom, Inspirational]

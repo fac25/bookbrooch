@@ -21,7 +21,7 @@ async function searchBy(query, value, page = 1) {
 async function searchBy2(query, value, page = 1) {
   const quotesPromise = await fetch(`${apiUrl}/${query}/${value}?page=${page}`);
   const quotesJson = await quotesPromise.json();
-  //console.log(quotesJson);
+  // console.log(quotesJson);
   return quotesJson;
 }
 //Query for additional pages with ?page=#
@@ -44,7 +44,7 @@ async function getSynonym(word) {
     options
   );
   const wordJson = await wordPromise.json();
-  //console.log(wordJson);
+  // console.log(wordJson);
   return wordJson;
 }
 

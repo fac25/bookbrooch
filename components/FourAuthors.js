@@ -23,7 +23,7 @@ export default function FourAuthors({
       setGuessTruthiness(false);
     }
     setTimeout(() => {
-      console.log("restart the game");
+      // console.log("restart the game");
       setAuthorUserChose("");
       setGuessTruthiness();
       startGame(setLoaderVisible, setActualQuoteObj, setAuthorsArray);

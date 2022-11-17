@@ -82,24 +82,24 @@ async function getQuoteAndThreeOtherAuthors() {
     arrayOfTagsToSearchBy[getRndInteger(0, arrayOfTagsToSearchBy.length)];
   //make fetch request just to find out how many pages there are
   const quotesResult = await searchBy2("tag", randomTag);
-  //console.log(quotesResult);
+  // console.log(quotesResult);
   //get a random page number
   const pageNum = getRndInteger(1, quotesResult.total_pages);
   //get all quotes from that random page
   const quotesByPage = await searchBy2("tag", randomTag, pageNum);
-  console.log(quotesByPage);
+  // console.log(quotesByPage);
   // get a single random quote from random page
   const randomQuoteObj = quotesByPage.quotes[getRndInteger(0, 30)];
-  console.log(randomQuoteObj);
+  // console.log(randomQuoteObj);
   //select three OTHER authors from quotesByPage
   let threeOtherAuthors = [];
   const quotesByPageResultAsArray = Object.values(quotesByPage)[2];
-  console.log(quotesByPageResultAsArray);
+  // console.log(quotesByPageResultAsArray);
   let twentyNineQuoteObjectsToChooseAuthorsFrom =
     quotesByPageResultAsArray.filter((indQuoteObj) => {
       return indQuoteObj.author !== randomQuoteObj.author;
     });
-  //console.log(twentyNineQuoteObjectsToChooseAuthorsFrom);
+  // console.log(twentyNineQuoteObjectsToChooseAuthorsFrom);
   for (let i = 0; threeOtherAuthors.length < 3; i++) {
     let randomIndex = getRndInteger(
       0,
@@ -111,7 +111,7 @@ async function getQuoteAndThreeOtherAuthors() {
       threeOtherAuthors.push(possibleAuthor);
     }
   }
-  console.log(threeOtherAuthors);
+  // console.log(threeOtherAuthors);
 
   return {
     randomQuoteObj: randomQuoteObj,

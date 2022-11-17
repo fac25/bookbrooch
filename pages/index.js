@@ -22,13 +22,13 @@ export default function Home() {
   const [loaderVisible, setLoaderVisible] = useState(true);
   useEffect(() => {
     let day = new Date().getDay();
-    //console.log(day);
+    // console.log(day);
     fetch(`https://goodquotesapi.herokuapp.com/tag/${dayTagPairs[day]}`)
       .then((res) => {
         return res.json();
       })
       .then((data) => {
-        //console.log(data.quotes[0].quote);
+        // console.log(data.quotes[0].quote);
         let slicedQuotes = data.quotes.slice(0, 5);
         let newRandomQuotes = [];
         slicedQuotes.forEach((element) => {

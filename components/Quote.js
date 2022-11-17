@@ -56,7 +56,7 @@ export default function Quote({
       {userData && (
         <Button
           onClick={() => {
-            console.log(quoteId, userData.userId);
+            // console.log(quoteId, userData.userId);
             deleteQuote(userData.userId, quoteId);
           }}
         >

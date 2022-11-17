@@ -25,11 +25,11 @@ export async function getServerSideProps({ params }) {
   // const quotesCol = collection(db, "quotes");
   // const snapShot1 = await getDocs(quotesCol);
   // snapShot1.forEach((snap) => {
-  //   console.log(snap.data());
+  // console.log(snap.data());
   // });
 
   //get current user's details (their name, quotes etc) from database
-  console.log("hi");
+  // console.log("hi");
   // - [X] query DB to get the user's name, search by params.id
   const userId = params.id;
   // - [X] write a query for the user's name
@@ -80,7 +80,7 @@ const DashboardPage = ({ userData }) => {
 
   // console.log("=============================================");
   // console.log(quoteData);
-  console.log(userData);
+  // console.log(userData);
   useEffect(() => {
     const colRef = collection(db, "users", userData.userId, "quotes");
     //real time update
@@ -100,10 +100,10 @@ const DashboardPage = ({ userData }) => {
   category === "all"
     ? (filteredQuotes = quotes)
     : (filteredQuotes = quotes.filter((q) => {
-        if (q.tags) {
-          return q.tags.includes(category);
-        }
-      }));
+      if (q.tags) {
+        return q.tags.includes(category);
+      }
+    }));
 
   return (
     <ProtectedRoute>
@@ -118,7 +118,6 @@ const DashboardPage = ({ userData }) => {
         </div>
         <SaveQuoteForm></SaveQuoteForm>
         <section>
-          {/* {console.log(quotes)} */}
           <FilterQuotesForm setCategory={setCategory}></FilterQuotesForm>
           <ul>
             {filteredQuotes.map((quoteObj) => {
@@ -143,7 +142,7 @@ const DashboardPage = ({ userData }) => {
                 //   </p>
                 //   <button
                 //     onClick={() => {
-                //       console.log(quoteId, userData.userId);
+                //       // console.log(quoteId, userData.userId);
                 //       deleteQuote(userData.userId, quoteId);
                 //     }}
                 //   >
