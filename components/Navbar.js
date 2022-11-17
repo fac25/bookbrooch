@@ -29,7 +29,7 @@ const Navbar = ({ children }) => {
     {
       id: 4,
       name: "Game",
-      link: "/game",
+      link: "/games/game-selection",
     },
   ];
 
@@ -82,7 +82,7 @@ const Navbar = ({ children }) => {
                           <Link href={`/users/${user.uid}`}>Dashboard</Link>
                         </li>
                         <li>
-                          <Link href={`/game`}>Game</Link>
+                          <Link href={`/games/game-selection`}>Game</Link>
                         </li>
                         <li>
                           <a onClick={handleLogout}>Logout</a>

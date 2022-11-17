@@ -25,7 +25,7 @@ context("Navigation", () => {
     cy.location("pathname").should("include", "signup");
   });
 
-  it("Login click takes to route '/game'", () => {
+  it("Login click takes to route '/games/game-selection'", () => {
     cy.get("nav").contains("Game").click();
     cy.location("pathname").should("include", "game");
   });
