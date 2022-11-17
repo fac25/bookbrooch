@@ -72,20 +72,26 @@ const Navbar = ({ children }) => {
                     {!user?.uid ? (
                       <>
                         {menuItems.map((item) => (
-                          <li key={item.id}>
+                          <li
+                            key={item.id}
+                            onClick={() => setIsNavActive(false)}
+                          >
                             <Link href={item?.link}>{item?.name}</Link>
                           </li>
                         ))}
                       </>
                     ) : (
                       <>
-                        <li>
+                        <li onClick={() => setIsNavActive(false)}>
+                          <Link href={`/`}>Home</Link>
+                        </li>
+                        <li onClick={() => setIsNavActive(false)}>
                           <Link href={`/users/${user.uid}`}>Dashboard</Link>
                         </li>
-                        <li>
+                        <li onClick={() => setIsNavActive(false)}>
                           <Link href={`/games/game-selection`}>Game</Link>
                         </li>
-                        <li>
+                        <li onClick={() => setIsNavActive(false)}>
                           <a onClick={handleLogout}>Logout</a>
                         </li>
                       </>
