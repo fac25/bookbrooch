@@ -20,7 +20,7 @@ describe("Search Quote in the Home Page", () => {
     cy.get("#tagsToSearchBy").select("Keyword");
 
     cy.get("input").type("love");
-    cy.contains("submit").click();
+    cy.contains("Submit").click();
     cy.get("ul").contains("I'm selfish");
 
     cy.get("ul").find("li").should("have.length", 40);
