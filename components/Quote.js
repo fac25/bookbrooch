@@ -9,7 +9,7 @@ export default function Quote({
   home = false,
   user = null,
 }) {
-  const { quoteId, quote, author, source, tags = ["happy"] } = quoteObj;
+  const { quoteId, quote, author, source, tags = ["Happiness"] } = quoteObj;
   return (
     <Box
       as="li"
