@@ -50,10 +50,12 @@ export default function Home() {
               </Heading>
               <ul>
                 {randomQuotes.map((quote, index) => {
+                  //console.log(quote)
                   return (
                     <Quote
+                      searchResults
                       key={quote.author + index}
-                      quoteObj={quote}
+                      quoteObj={quote /* Should have tags included */}
                       home={true}
                       user={user}
                     />

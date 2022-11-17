@@ -22,10 +22,10 @@ export default function Search() {
     try {
       const quotes = await searchBy(data.tagsToSearchBy, data.search);
       setSearchResults(quotes);
-      //   console.log(quotes);
+      // console.log(quotes);
     } catch (error) {
-      console.log(error.message);
-      alert(error.message);
+      // console.log(error.message);
+      // alert(error.message);
     }
   };
 
@@ -78,8 +78,10 @@ export default function Search() {
           </Heading>
           <ul>
             {searchResults.map((quote, index) => {
+              quote.tags = ["Inspirational"]
               return (
                 <Quote
+                  searchResults={true}
                   key={quote.author + index}
                   quoteObj={quote}
                   home={true}

@@ -43,13 +43,13 @@ const LoginPage = () => {
 
         // const snapShot1 = await getDocs(quotesCol);
         // snapShot1.forEach((snap) => {
-        //   console.log(snap.data());
+        // console.log(snap.data());
         // });
         router.push(`/users/${user.uid}`);
         // ...
       });
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
     }
   };
   return (

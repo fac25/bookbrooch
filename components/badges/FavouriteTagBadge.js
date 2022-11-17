@@ -15,7 +15,7 @@ function FavouriteTagBadge({ userId }) {
         onSnapshot(colRef, () => {
             favTag(userId).then(favTags => {
                 setFav(favTags)
-                //console.log(favTags)
+                // console.log(favTags)
             });
 
         })
@@ -32,7 +32,7 @@ function FavouriteTagBadge({ userId }) {
     const getFavTags = () => {
         favTag(userId).then(favTags => {
             setFav(favTags)
-            //console.log(amount)
+            // console.log(amount)
         })
     }
     // const quoteNumber = () => {
